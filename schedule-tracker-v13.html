@@ -1397,14 +1397,21 @@ function ghSave(){
   if(ghSha)body.sha=ghSha;
   ghStatus('保存中…');
   fetch(ghApiUrl(c),{method:'PUT',headers:ghHeaders(c),body:JSON.stringify(body)}).then(function(r){
-    if(r.status===409){
+    if(r.status===409||r.status===422){
       return fetch(ghApiUrl(c),{headers:ghHeaders(c)}).then(function(r2){
-        if(!r2.ok)throw new Error('无法获取最新 sha');
+        if(r2.status===404){
+          delete body.sha;
+          return fetch(ghApiUrl(c),{method:'PUT',headers:ghHeaders(c),body:JSON.stringify(body)}).then(function(r3){
+            if(!r3.ok)throw new Error('创建失败 HTTP '+r3.status);
+            return r3.json();
+          });
+        }
+        if(!r2.ok)throw new Error('无法获取最新 sha (HTTP '+r2.status+')');
         return r2.json();
       }).then(function(j){
         ghSha=j.sha;body.sha=ghSha;
         return fetch(ghApiUrl(c),{method:'PUT',headers:ghHeaders(c),body:JSON.stringify(body)}).then(function(r3){
-          if(!r3.ok)throw new Error('重试失败');
+          if(!r3.ok)throw new Error('重试失败 HTTP '+r3.status);
           return r3.json();
         });
       });
