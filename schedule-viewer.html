@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>摄影档期总表 · 2026</title>
+<style>
+  :root{
+    --cream:#FAF4E8;
+    --cream-2:#F4EBD6;
+    --sage:#9CAA8A;
+    --sage-deep:#5C7152;
+    --peach:#E8A48A;
+    --peach-deep:#C77A5C;
+    --gold:#D9A85C;
+    --brick:#B85440;
+    --ink:#3A2E22;
+    --ink-soft:#6E5E4E;
+    --line:rgba(58,46,34,0.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);font-family:-apple-system,"PingFang SC","Hiragino Sans GB",sans-serif;line-height:1.6}
+  .wrap{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+  header{text-align:center;padding:20px 0 32px;border-bottom:1px solid var(--line);margin-bottom:32px}
+  h1{font-size:30px;color:var(--sage-deep);letter-spacing:1px;margin-bottom:8px}
+  .sub{color:var(--ink-soft);font-size:14px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:36px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 2px 6px rgba(92,113,82,0.06)}
+  .stat .lbl{font-size:12px;color:var(--ink-soft);letter-spacing:0.5px}
+  .stat .num{font-size:26px;font-weight:600;color:var(--sage-deep);margin-top:4px}
+  .stat.brick .num{color:var(--brick)}
+  .stat.peach .num{color:var(--peach-deep)}
+  .stat.gold .num{color:#9C7A2C}
+  .month{background:#fff;border:1px solid var(--line);border-radius:16px;margin-bottom:24px;overflow:hidden;box-shadow:0 2px 8px rgba(92,113,82,0.06)}
+  .month-head{background:var(--cream-2);padding:14px 20px;font-weight:600;color:var(--sage-deep);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
+  .month-head .count{font-size:13px;color:var(--ink-soft);font-weight:400}
+  table{width:100%;border-collapse:collapse}
+  th{text-align:left;padding:12px 20px;font-size:12px;color:var(--ink-soft);font-weight:500;letter-spacing:0.5px;border-bottom:1px solid var(--line);background:var(--cream)}
+  td{padding:14px 20px;font-size:14px;border-bottom:1px solid rgba(58,46,34,0.05);vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  tr:hover{background:rgba(156,170,138,0.06)}
+  .name{font-weight:500;color:var(--ink)}
+  .date{color:var(--ink-soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .client{display:inline-block;padding:2px 8px;border-radius:6px;background:var(--cream-2);font-size:12px;color:var(--ink-soft)}
+  .client.direct{background:rgba(217,168,92,0.18);color:#9C7A2C}
+  .client.friend{background:rgba(156,170,138,0.20);color:var(--sage-deep)}
+  .money{font-variant-numeric:tabular-nums;font-weight:500;color:var(--peach-deep);white-space:nowrap}
+  .money.zero{color:var(--ink-soft);font-weight:400}
+  .steps{display:inline-flex;gap:4px}
+  .dot{width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;border:1.5px solid var(--line);color:var(--ink-soft);background:#fff}
+  .dot.on{border-color:var(--sage);background:var(--sage);color:#fff}
+  .notes{font-size:12px;color:var(--ink-soft);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .legend{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:18px;background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:28px;font-size:13px;color:var(--ink-soft)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend .dot{position:static}
+  footer{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:48px;padding-top:24px;border-top:1px solid var(--line)}
+  @media (max-width:720px){
+    .wrap{padding:16px 12px 60px}
+    th,td{padding:10px 8px;font-size:13px}
+    .notes{display:none}
+    .stat .num{font-size:22px}
+    h1{font-size:24px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📷 摄影档期总表 · 2026</h1>
+    <div class="sub">数据更新于 <span id="upd"></span> · 共 <span id="totalCnt">--</span> 条档期</div>
+  </header>
+
+  <div class="stats" id="stats"></div>
+  <div class="legend">
+    <span><i class="dot"></i> 未完成</span>
+    <span><i class="dot on"></i> 已完成</span>
+    <span>4 个状态点代表：</span>
+    <span>拍摄</span><span>交付</span><span>开票</span><span>结款</span>
+  </div>
+
+  <div id="months"></div>
+
+  <footer>
+    档期数据来源：<code>data.json</code> · 双击此 HTML 文件即可离线查看<br>
+    绿/桃/金/砖红配色 ｜ 由 Mac 对账守护进程每 5 分钟自动同步到「提醒事项·档期管理」+「日历·档期」
+  </footer>
+</div>
+
+<script>
+// data.json 内嵌（复制自 data.json）
+const DATA = {"updatedAt":"2026-07-23T15:40:12.517144+08:00","projects":[{"id":"p-20261025-00","name":"宁波婚礼","client":"","date":"2026-10-25","type":"婚礼","payment":{"date":"","amount":1600,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"","deliverDone":"","deliverMethod":"","notes":"（双机，1600，+300（摄像介绍费，待推进，对接具体信息）"},{"id":"p-20260815-01","name":"童行园毕业典礼","client":"直客","date":"2026-08-15","type":"活动","payment":{"date":"","amount":1000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"","deliverDone":"","deliverMethod":"","notes":"（直客，未开票1000"},{"id":"p-20260827-02","name":"温莎","client":"","date":"2026-08-27","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"","deliverDone":"","deliverMethod":"","notes":""},{"id":"p-20260830-03","name":"上午慈溪百日宴","client":"","date":"2026-08-30","type":"活动","payment":{"date":"","amount":1000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"","deliverDone":"","deliverMethod":"","notes":"1000"},{"id":"p-20260724-04","name":"上午艾毅幼儿园毕业典礼","client":"直客","date":"2026-07-24","type":"活动","payment":{"date":"","amount":1000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"","deliverDone":"","deliverMethod":"","notes":"（直客，未开票，1000"},{"id":"p-20260725-05","name":"活动","client":"沃总","date":"2026-07-25","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"","deliverDone":"","deliverMethod":"","notes":"（沃总"},{"id":"p-20260728-06","name":"活动","client":"欧阳","date":"2026-07-28","type":"活动","payment":{"date":"","amount":1000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"","deliverDone":"","deliverMethod":"","notes":"（欧阳 1000"},{"id":"p-20260729-07","name":"活动","client":"欧阳","date":"2026-07-29","type":"活动","payment":{"date":"","amount":1000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"","deliverDone":"","deliverMethod":"","notes":"（欧阳 1000"},{"id":"p-20260730-08","name":"活动","client":"欧阳","date":"2026-07-30","type":"活动","payment":{"date":"","amount":1000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"","deliverDone":"","deliverMethod":"","notes":"（欧阳 1000"},{"id":"p-20260731-09","name":"温莎幼儿园","client":"直客","date":"2026-07-31","type":"活动","payment":{"date":"","amount":15,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"","deliverDone":"","deliverMethod":"","notes":"（直客，未开票，15号前开票，750"},{"id":"p-20260718-10","name":"活动","client":"沃总","date":"2026-07-18","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-07-18","deliverDone":"","deliverMethod":"","notes":"（沃总"},{"id":"p-20260719-11","name":"上午活动","client":"冰哥","date":"2026-07-19","type":"活动","payment":{"date":"","amount":800,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-07-19","deliverDone":"","deliverMethod":"","notes":"（冰哥 800"},{"id":"p-20260717-12","name":"温莎幼儿园","client":"直客","date":"2026-07-17","type":"活动","payment":{"date":"","amount":15,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-07-17","deliverDone":"","deliverMethod":"","notes":"（直客，未开票，15号前开票，750"},{"id":"p-20260714-13","name":"温莎幼儿园","client":"直客","date":"2026-07-14","type":"活动","payment":{"date":"","amount":15,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-07-14","deliverDone":"","deliverMethod":"","notes":"（直客，未开票，15号前开票，750"},{"id":"p-20260715-14","name":"小海绵毕业典礼","client":"","date":"2026-07-15","type":"活动","payment":{"date":"","amount":800,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-07-15","deliverDone":"","deliverMethod":"","notes":"800 已开票已结"},{"id":"p-20260707-15","name":"双机位活动","client":"直客","date":"2026-07-07","type":"活动","payment":{"date":"","amount":2700,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-07-07","deliverDone":"","deliverMethod":"","notes":"（直客，已开票2700（开票金额"},{"id":"p-20260708-16","name":"单机位活动","client":"直客","date":"2026-07-08","type":"活动","payment":{"date":"","amount":1200,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-07-08","deliverDone":"","deliverMethod":"","notes":"（直客，已开1200"},{"id":"p-20260711-17","name":"有艺剧团服装拍摄","client":"沃总","date":"2026-07-11","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-07-11","deliverDone":"","deliverMethod":"","notes":"（沃总"},{"id":"p-20260703-18","name":"温莎毕业典礼","client":"直客","date":"2026-07-03","type":"活动","payment":{"date":"","amount":15,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-07-03","deliverDone":"","deliverMethod":"","notes":"（直客，未开票，15号前开票，750"},{"id":"p-20260702-19","name":"伊莱瑞德毕业典礼","client":"直客","date":"2026-07-02","type":"活动","payment":{"date":"","amount":2000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-07-02","deliverDone":"","deliverMethod":"","notes":"（直客，已开票未结款 2000"},{"id":"p-20260701-20","name":"女企业家活动","client":"冰哥","date":"2026-07-01","type":"活动","payment":{"date":"","amount":800,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-07-01","deliverDone":"","deliverMethod":"","notes":"（半天，冰哥，800"},{"id":"p-20260704-21","name":"活动","client":"沃总","date":"2026-07-04","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-07-04","deliverDone":"","deliverMethod":"","notes":"（沃总）"},{"id":"p-20260601-22","name":"伊莱瑞德六一活动","client":"","date":"2026-06-01","type":"活动","payment":{"date":"","amount":2000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-06-01","deliverDone":"","deliverMethod":"","notes":"（已开票，2000"},{"id":"p-20260627-23","name":"下午全家福","client":"直客","date":"2026-06-27","type":"活动","payment":{"date":"","amount":1200,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-06-27","deliverDone":"","deliverMethod":"","notes":"（直客，已开票已结款 1200"},{"id":"p-20260627-24","name":"江北艾毅毕业典礼","client":"直客","date":"2026-06-27","type":"活动","payment":{"date":"","amount":1000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-06-27","deliverDone":"","deliverMethod":"","notes":"（直客，已开票已结款1000"},{"id":"p-20260628-25","name":"学速表彰活动","client":"直客","date":"2026-06-28","type":"活动","payment":{"date":"","amount":2400,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-06-28","deliverDone":"","deliverMethod":"","notes":"（直客已开票已结款 2400"},{"id":"p-20260625-26","name":"宁海工地演练","client":"同行","date":"2026-06-25","type":"活动","payment":{"date":"","amount":1200,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-06-25","deliverDone":"","deliverMethod":"","notes":"（同行，来源：翔 ，1200"},{"id":"p-20260623-27","name":"宁海工地演练","client":"同行","date":"2026-06-23","type":"活动","payment":{"date":"","amount":1700,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-06-23","deliverDone":"","deliverMethod":"","notes":"（同行来源：翔 ，1700"},{"id":"p-20260620-28","name":"活动","client":"同行","date":"2026-06-20","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-06-20","deliverDone":"","deliverMethod":"","notes":"（同行来源：沃总）"},{"id":"p-20260619-29","name":"端午活动","client":"同行","date":"2026-06-19","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-06-19","deliverDone":"","deliverMethod":"","notes":"（同行来源：沃总）"},{"id":"p-20260618-30","name":"温莎父亲节","client":"直客","date":"2026-06-18","type":"活动","payment":{"date":"","amount":750,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-06-18","deliverDone":"","deliverMethod":"","notes":"（直客已开票已结款，750"},{"id":"p-20260616-31","name":"阿信活动","client":"欧阳","date":"2026-06-16","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-06-16","deliverDone":"","deliverMethod":"","notes":"（来源：欧阳"},{"id":"p-20260601-32","name":"温莎六一活动","client":"直客","date":"2026-06-01","type":"活动","payment":{"date":"","amount":750,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-06-01","deliverDone":"","deliverMethod":"","notes":"（（直客已开票已结款，750"},{"id":"p-20260601-33","name":"艾毅六一活动","client":"","date":"2026-06-01","type":"活动","payment":{"date":"","amount":1000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-06-01","deliverDone":"","deliverMethod":"","notes":"（已开票，已结1000"},{"id":"p-20260606-34","name":"全天国浩会议","client":"直客","date":"2026-06-06","type":"活动","payment":{"date":"","amount":2700,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-06-06","deliverDone":"","deliverMethod":"","notes":"（直客已开票 2700，已结款"},{"id":"p-20260607-35","name":"半天国浩会议","client":"直客","date":"2026-06-07","type":"活动","payment":{"date":"","amount":1000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-06-07","deliverDone":"","deliverMethod":"","notes":"（直客已开票 1000已结款"},{"id":"p-20260612-36","name":"温莎生日会","client":"直客","date":"2026-06-12","type":"活动","payment":{"date":"","amount":750,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-06-12","deliverDone":"","deliverMethod":"","notes":"（直客已开票已结款，750"},{"id":"p-20260613-37","name":"下午活动","client":"同行","date":"2026-06-13","type":"活动","payment":{"date":"","amount":800,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-06-13","deliverDone":"","deliverMethod":"","notes":"（同行，来源：tommy，未结款800"},{"id":"p-20260529-38","name":"温莎自助餐","client":"","date":"2026-05-29","type":"活动","payment":{"date":"","amount":750,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-05-29","deliverDone":"","deliverMethod":"","notes":"（已开票已结款750"},{"id":"p-20260524-39","name":"上午慈溪活动","client":"冰哥","date":"2026-05-24","type":"活动","payment":{"date":"","amount":800,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-05-24","deliverDone":"","deliverMethod":"","notes":"（半天，冰哥，800"},{"id":"p-20260522-40","name":"温莎户外活动","client":"","date":"2026-05-22","type":"活动","payment":{"date":"","amount":750,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-05-22","deliverDone":"","deliverMethod":"","notes":"（已开票已结款750"},{"id":"p-20260520-41","name":"秀水街活动","client":"沃总","date":"2026-05-20","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-05-20","deliverDone":"","deliverMethod":"","notes":"（沃总）"},{"id":"p-20260515-42","name":"温莎生日会","client":"","date":"2026-05-15","type":"活动","payment":{"date":"","amount":750,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-05-15","deliverDone":"","deliverMethod":"","notes":"（已开票已结款750"},{"id":"p-20260517-43","name":"宁波帮博物馆活动","client":"欧阳","date":"2026-05-17","type":"活动","payment":{"date":"","amount":1000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-05-17","deliverDone":"","deliverMethod":"","notes":"（未结款，欧阳，1000"},{"id":"p-20260518-44","name":"伊莱瑞德校鉴拍摄","client":"","date":"2026-05-18","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-05-18","deliverDone":"","deliverMethod":"","notes":"（未结款"},{"id":"p-20260513-45","name":"伊莱瑞德春游","client":"","date":"2026-05-13","type":"活动","payment":{"date":"","amount":1000,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-05-13","deliverDone":"","deliverMethod":"","notes":"（已开票未结款，1000"},{"id":"p-20260512-46","name":"伊莱瑞德毕业季","client":"","date":"2026-05-12","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-05-12","deliverDone":"","deliverMethod":"","notes":"（未结款"},{"id":"p-20260509-47","name":"温莎母亲节","client":"","date":"2026-05-09","type":"活动","payment":{"date":"","amount":750,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"已开票","date":"","sent":false},"shootDone":"2026-05-09","deliverDone":"","deliverMethod":"","notes":"（已开票已结款750"},{"id":"p-20260501-48","name":"海曙印象城活动","client":"沃总","date":"2026-05-01","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-05-01","deliverDone":"","deliverMethod":"","notes":"（沃总）"},{"id":"p-20260503-49","name":"活动","client":"沃总","date":"2026-05-03","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-05-03","deliverDone":"","deliverMethod":"","notes":"（沃总）"},{"id":"p-20260428-50","name":"文旅共兴","client":"冰哥","date":"2026-04-28","type":"活动","payment":{"date":"","amount":800,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-04-28","deliverDone":"","deliverMethod":"","notes":"（半天，冰哥，800"},{"id":"p-20260424-51","name":"鄞州龙湖天街","client":"沃总","date":"2026-04-24","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-04-24","deliverDone":"","deliverMethod":"","notes":"（沃总）"},{"id":"p-20260409-52","name":"活动","client":"沃总","date":"2026-04-09","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-04-09","deliverDone":"","deliverMethod":"","notes":"（沃总）"},{"id":"p-20260411-53","name":"诺丁汉集体婚礼","client":"沃总","date":"2026-04-11","type":"婚礼","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-04-11","deliverDone":"","deliverMethod":"","notes":"（沃总）"},{"id":"p-20260404-54","name":"活动","client":"沃总","date":"2026-04-04","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-04-04","deliverDone":"","deliverMethod":"","notes":"（沃总）"},{"id":"p-20260328-55","name":"活动","client":"沃总","date":"2026-03-28","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-03-28","deliverDone":"","deliverMethod":"","notes":"（沃总）"},{"id":"p-20260228-56","name":"甬宁新天地","client":"沃总","date":"2026-02-28","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-02-28","deliverDone":"","deliverMethod":"","notes":"（沃总）"},{"id":"p-20260216-57","name":"活动","client":"沃总","date":"2026-02-16","type":"活动","payment":{"date":"","amount":0,"method":""},"publicAccount":{"date":"","amount":0},"invoice":{"no":"","date":"","sent":false},"shootDone":"2026-02-16","deliverDone":"","deliverMethod":"","notes":"（沃总）"}]};
+</script>
+<script>
+const data = DATA;
+const fmt = d => d ? d.replace(/-/g,'/') : '';
+const monthKey = d => d ? d.slice(0,7) : 'unknown';
+
+const projects = data.projects.slice().sort((a,b)=>a.date.localeCompare(b.date));
+
+// 更新头
+document.getElementById('upd').textContent = data.updatedAt ? data.updatedAt.replace('T',' ').replace(/\..*/,'') : '--';
+document.getElementById('totalCnt').textContent = projects.length;
+
+// 4 个状态
+function stepState(p){
+  return {
+    shoot: !!p.shootDone,
+    deliver: !!p.deliverDone,
+    invoice: !!(p.invoice && p.invoice.no),
+    paid: !!(p.publicAccount && p.publicAccount.amount>0)
+  };
+}
+
+// 顶部统计
+const statBox = document.getElementById('stats');
+const total = projects.length;
+const done = projects.filter(p=>p.shootDone).length;
+const invoiced = projects.filter(p=>p.invoice && p.invoice.no).length;
+const withMoney = projects.filter(p=>p.payment && p.payment.amount>0).length;
+const totalAmount = projects.reduce((s,p)=>s+(p.payment?.amount||0),0);
+const stats = [
+  ['总档期', total, ''],
+  ['已拍摄', done, ''],
+  ['已开票', invoiced, ''],
+  ['有金额记录', withMoney, ''],
+  ['总营收', '¥'+totalAmount.toLocaleString(), 'peach'],
+];
+stats.forEach(([lbl,num,cls])=>{
+  const d=document.createElement('div');
+  d.className='stat '+(cls||'');
+  d.innerHTML=`<div class="lbl">${lbl}</div><div class="num">${num}</div>`;
+  statBox.appendChild(d);
+});
+
+// 按月分组
+const groups = {};
+projects.forEach(p=>{
+  const k = monthKey(p.date);
+  (groups[k] = groups[k] || []).push(p);
+});
+
+const monthsEl = document.getElementById('months');
+const monthNames = {01:'一月',02:'二月',03:'三月',04:'四月',05:'五月',06:'六月',07:'七月',08:'八月',09:'九月',10:'十月',11:'十一月',12:'十二月'};
+Object.keys(groups).sort().forEach(mk=>{
+  const list = groups[mk];
+  const [yy,mm] = mk.split('-');
+  const monthAmt = list.reduce((s,p)=>s+(p.payment?.amount||0),0);
+  const box = document.createElement('div');
+  box.className='month';
+  box.innerHTML=`
+    <div class="month-head">
+      <span>${yy} 年 ${monthNames[mm]||mm}</span>
+      <span class="count">${list.length} 条 · 营收 ¥${monthAmt.toLocaleString()}</span>
+    </div>
+    <table>
+      <thead><tr>
+        <th>项目</th><th>日期</th><th>客户/来源</th><th>金额</th><th>拍摄</th><th>交付</th><th>开票</th><th>结款</th><th>备注</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  `;
+  const tb = box.querySelector('tbody');
+  list.forEach(p=>{
+    const st = stepState(p);
+    const isDirect = (p.client||'').includes('直客') || (p.notes||'').includes('直客');
+    const tr = document.createElement('tr');
+    tr.innerHTML=`
+      <td><div class="name">${p.name||''}</div></td>
+      <td class="date">${fmt(p.date)}</td>
+      <td><span class="client ${isDirect?'direct':'friend'}">${p.client||''}</span></td>
+      <td class="money ${(p.payment?.amount||0)===0?'zero':''}">${(p.payment?.amount||0)>0?'¥'+p.payment.amount.toLocaleString():'—'}</td>
+      <td><span class="steps"><i class="dot ${st.shoot?'on':''}"></i></span></td>
+      <td><span class="steps"><i class="dot ${st.deliver?'on':''}"></i></span></td>
+      <td><span class="steps"><i class="dot ${st.invoice?'on':''}"></i></span></td>
+      <td><span class="steps"><i class="dot ${st.paid?'on':''}"></i></span></td>
+      <td class="notes" title="${p.notes||''}">${p.notes||''}</td>
+    `;
+    tb.appendChild(tr);
+  });
+  monthsEl.appendChild(box);
+});
+</script>
+</body>
+</html>
