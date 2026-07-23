@@ -95,7 +95,7 @@ const data = DATA;
 const fmt = d => d ? d.replace(/-/g,'/') : '';
 const monthKey = d => d ? d.slice(0,7) : 'unknown';
 
-const projects = data.projects.slice().sort((a,b)=>a.date.localeCompare(b.date));
+const projects = data.projects.slice().sort((a,b)=>b.date.localeCompare(a.date));
 
 // 更新头
 document.getElementById('upd').textContent = data.updatedAt ? data.updatedAt.replace('T',' ').replace(/\..*/,'') : '--';
