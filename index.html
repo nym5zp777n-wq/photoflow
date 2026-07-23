@@ -2,44 +2,63 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8" />
-<!-- 移动端适配：锁定缩放、按设备宽度渲染 -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="档期录入" />
-<title>摄影档期录入</title>
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="摄影档期" />
+<meta name="theme-color" content="#9caa8a" />
+<title>摄影档期 · 2026</title>
 <style>
   :root{
-    --cream:#fbf4e9; --cream-2:#fdf8ee; --paper:#fffdf8;
+    --cream:#fbf4e9; --cream-2:#f4ebd6; --paper:#fffdf8;
     --ink:#4a4034; --ink-soft:#7a6f5e; --line:#ece0cc;
-    --sage:#8aa37b; --sage-soft:#e6efdf;
-    --peach:#ef9a7d; --peach-soft:#fbe4d8;
+    --sage:#9caa8a; --sage-deep:#5c7152; --sage-soft:#e6efdf;
+    --peach:#ef9a7d; --peach-deep:#c77a5c; --peach-soft:#fbe4d8;
     --gold:#dca63c; --gold-soft:#f8ecc9;
     --brick:#b5533c; --brick-soft:#f1d9cf;
     --shadow:0 6px 20px rgba(120,90,50,.12);
+    --tab-h:60px;
   }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
-  body{
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{background:var(--cream);color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-    color:var(--ink);background:var(--cream);min-height:100vh;-webkit-font-smoothing:antialiased;
-    padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
-  }
-  .wrap{max-width:680px;margin:0 auto;padding:18px 16px 48px}
-  header.top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-  .logo{width:40px;height:40px;border-radius:12px;flex:0 0 auto;
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{padding-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom));
+    min-height:100vh;padding-top:env(safe-area-inset-top)}
+
+  /* 顶部 sticky header */
+  header.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;
+    padding:12px 16px;border-bottom:1px solid var(--line);
+    background:linear-gradient(var(--cream),rgba(251,244,233,.92));
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .logo{width:38px;height:38px;border-radius:12px;flex:0 0 auto;
     background:linear-gradient(135deg,var(--sage),var(--gold));box-shadow:var(--shadow);position:relative}
   .logo:after{content:"";position:absolute;inset:9px;border-radius:50%;
     background:radial-gradient(circle at 35% 35%, #fff8, transparent 60%), var(--cream-2);
     box-shadow:inset 0 0 0 3px var(--brick-soft)}
-  h1{font-size:20px;margin:0;letter-spacing:.5px}
-  .sub{color:var(--ink-soft);font-size:12px;margin-top:2px}
+  header .ttl{flex:1;min-width:0}
+  header h1{font-size:19px;margin:0;letter-spacing:.5px;color:var(--ink)}
+  header .sub{color:var(--ink-soft);font-size:11px;margin-top:1px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #setTokenBtn{border:none;background:var(--cream-2);border:1px solid var(--line);
+    border-radius:12px;width:42px;height:42px;font-size:20px;cursor:pointer;flex:0 0 auto}
+  #setTokenBtn:active{background:var(--sage-soft)}
 
+  .app{max-width:680px;margin:0 auto}
+
+  /* 视图切换 */
+  .view{padding:14px 14px 24px;display:none;animation:fade .25s ease}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* 卡片通用 */
   .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;
-    box-shadow:var(--shadow);padding:16px;margin-bottom:18px}
+    box-shadow:var(--shadow);padding:16px;margin-bottom:16px}
   .card h2{font-size:16px;margin:0 0 12px;display:flex;align-items:center;gap:8px}
   .card h2 .tag{font-size:11px;font-weight:600;color:var(--sage);background:var(--sage-soft);
     border-radius:999px;padding:2px 10px}
 
+  /* 表单 */
   .field{margin-bottom:12px}
   .field label{display:block;font-size:13px;color:var(--ink-soft);margin-bottom:5px;font-weight:600}
   .field input,.field select{
@@ -49,19 +68,13 @@
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .sec-title{font-size:13px;font-weight:700;color:var(--brick);margin:14px 0 6px;
     border-left:4px solid var(--gold);padding-left:8px}
-
   .btn{display:block;width:100%;border:none;border-radius:14px;padding:15px;font-size:16px;
     font-weight:700;cursor:pointer;transition:.15s}
   .btn-save{background:linear-gradient(135deg,var(--sage),#7c9470);color:#fff;box-shadow:var(--shadow)}
   .btn-save:active{transform:scale(.99)}
   .btn-ghost{background:var(--cream-2);color:var(--ink-soft);border:1px solid var(--line);margin-top:10px}
 
-  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);
-    background:var(--ink);color:#fff;padding:11px 20px;border-radius:999px;font-size:14px;
-    opacity:0;pointer-events:none;transition:.25s;box-shadow:var(--shadow);z-index:20}
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-  /* 列表 */
+  /* 录入页列表 */
   .list{display:flex;flex-direction:column;gap:10px}
   .row{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 14px;
     display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);cursor:pointer}
@@ -74,157 +87,265 @@
   .dots i.on.shoot{background:var(--sage)}
   .dots i.on.deliver{background:var(--gold)}
   .dots i.on.invoice{background:var(--peach)}
-  .dots i.on.settle{background:var(--brick)}
+  .dots i.on.paid{background:var(--brick)}
   .empty{text-align:center;color:var(--ink-soft);font-size:14px;padding:18px 0}
   .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--ink-soft);margin:4px 2px 10px}
   .legend span{display:inline-flex;align-items:center;gap:4px}
   .legend i{width:10px;height:10px;border-radius:50%}
-  footer{margin-top:22px;color:var(--ink-soft);font-size:12px;text-align:center;line-height:1.7}
+
+  /* 档期页：筛选 chips */
+  .chips{display:flex;gap:10px;margin-bottom:14px}
+  .chip{flex:1;min-height:44px;border:1px solid var(--line);background:var(--cream);color:var(--ink-soft);
+    border-radius:12px;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s;font-family:inherit}
+  .chip.active{background:var(--sage);border-color:var(--sage);color:#fff}
+
+  /* 档期页：概览 */
+  .ov{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
+  .ov .box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center;box-shadow:var(--shadow)}
+  .ov .lbl{font-size:11px;color:var(--ink-soft)}
+  .ov .num{font-size:20px;font-weight:700;color:var(--sage-deep);font-variant-numeric:tabular-nums;margin-top:2px}
+  .ov .num.peach{color:var(--peach-deep)}
+  .ov .num.gold{color:var(--gold)}
+
+  /* 档期页：卡片 */
+  .scard{background:var(--paper);border:1px solid var(--line);border-radius:16px;margin-bottom:12px;
+    box-shadow:var(--shadow);overflow:hidden}
+  .card-head{display:flex;align-items:center;gap:12px;padding:14px 16px;min-height:64px;cursor:pointer}
+  .date-badge{flex:0 0 auto;text-align:center;background:var(--cream-2);border-radius:12px;padding:6px 10px;min-width:56px}
+  .date-badge .d{font-size:18px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
+  .date-badge .m{font-size:11px;color:var(--ink-soft)}
+  .card-main{flex:1;min-width:0}
+  .card-title{font-weight:600;font-size:16px;color:var(--ink);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .tag{font-size:11px;padding:2px 8px;border-radius:999px;font-weight:500;white-space:nowrap}
+  .tag.direct{background:rgba(220,166,60,.22);color:#9C7A2C}
+  .tag.friend{background:rgba(156,170,138,.22);color:var(--sage-deep)}
+  .tag.type{background:var(--cream-2);color:var(--ink-soft)}
+  .card-sub{display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap}
+  .sdots{display:inline-flex;gap:5px}
+  .sdot{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+    font-size:10px;border:1.5px solid var(--line);color:var(--ink-soft);background:#fff}
+  .sdot.on{border-color:var(--sage);background:var(--sage);color:#fff}
+  .cal-badge{font-size:11px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+  .cal-badge.synced{background:rgba(156,170,138,.18);color:var(--sage-deep);border-color:transparent}
+  .cal-badge.unsynced{background:rgba(181,83,60,.1);color:var(--brick);border-color:transparent}
+  .chev{flex:0 0 auto;color:var(--ink-soft);transition:transform .2s;font-size:14px}
+  .scard.open .chev{transform:rotate(180deg)}
+  .card-detail{max-height:0;overflow:hidden;transition:max-height .28s ease}
+  .scard.open .card-detail{max-height:560px}
+  .detail-inner{padding:14px 16px;border-top:1px solid var(--line)}
+  .rows{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:10px}
+  .row2{background:var(--cream-2);border-radius:10px;padding:8px 10px}
+  .row2 .k{font-size:11px;color:var(--ink-soft)}
+  .row2 .v{font-size:14px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;word-break:break-word}
+  .row2 .v.money{color:var(--peach-deep)}
+  .steps-row{display:flex;gap:8px;margin:6px 0 12px;flex-wrap:wrap}
+  .step{flex:1;min-width:64px;text-align:center;background:var(--cream-2);border-radius:10px;padding:8px 4px;font-size:12px}
+  .step .sd{width:22px;height:22px;border-radius:50%;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;
+    font-size:11px;border:1.5px solid var(--line);color:var(--ink-soft);background:#fff}
+  .step.done .sd{border-color:var(--sage);background:var(--sage);color:#fff}
+  .step .sl{color:var(--ink-soft)}
+  .step.done .sl{color:var(--sage-deep);font-weight:600}
+  .notes-box{font-size:13px;color:var(--ink-soft);background:var(--cream-2);border-radius:10px;padding:10px;white-space:pre-wrap;word-break:break-word}
+
+  /* 财务页 */
+  .fin-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:16px;
+    box-shadow:var(--shadow);border-left:5px solid var(--gold)}
+  .fin-card.friend{border-left-color:var(--sage)}
+  .fin-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+  .fin-name{font-size:18px;font-weight:700;color:var(--ink)}
+  .fin-cnt{font-size:12px;color:var(--ink-soft)}
+  .amt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+  .amt{background:var(--cream-2);border-radius:12px;padding:12px;text-align:center}
+  .amt .k{font-size:11px;color:var(--ink-soft)}
+  .amt .v{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:3px}
+  .amt.rev .v{color:var(--peach-deep)}
+  .amt.inv .v{color:var(--sage-deep)}
+  .amt.uninv .v{color:var(--brick)}
+  .bar-wrap{margin-top:4px}
+  .bar-label{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-soft);margin-bottom:6px}
+  .bar-label b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .bar{height:14px;background:var(--cream-2);border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--sage),var(--sage-deep));border-radius:999px;transition:width .4s}
+  .fin-flag{margin-top:12px;font-size:13px;padding:8px 12px;border-radius:10px;line-height:1.5}
+  .fin-flag.warn{background:rgba(181,83,60,.12);color:var(--brick)}
+  .fin-flag.ok{background:rgba(156,170,138,.18);color:var(--sage-deep)}
+  .fin-flag.info{background:var(--cream-2);color:var(--ink-soft)}
+
+  /* 底部 Tab 栏 */
+  .tabbar{position:fixed;left:0;right:0;bottom:0;height:calc(var(--tab-h) + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:10}
+  .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    color:var(--ink-soft);font-size:12px;font-weight:500;cursor:pointer;min-height:var(--tab-h)}
+  .tab .ic{font-size:20px;line-height:1;transition:transform .15s}
+  .tab.active{color:var(--sage-deep)}
+  .tab.active .ic{transform:scale(1.12)}
+
+  /* toast */
+  .toast{position:fixed;left:50%;bottom:calc(var(--tab-h) + env(safe-area-inset-bottom) + 12px);
+    transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 20px;
+    border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;box-shadow:var(--shadow);z-index:20;max-width:90%}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media (min-width:720px){
+    h1{font-size:22px}
+    .ov{grid-template-columns:repeat(4,1fr)}
+    .rows{grid-template-columns:repeat(4,1fr)}
+  }
 </style>
 </head>
 <body>
-<!--
-  使用说明（直连 GitHub 版，免 Worker，token 不写进本文件）：
-  1) 用 Safari 打开本页（通过 GitHub Pages 地址，或任意能访问的网址）。
-  2) 首次打开点右上角 ⚙，粘贴一次你的 GitHub token（仅限 photoflow 仓库权限），存在手机本地。
-  3) 点底部「分享」→「添加到主屏幕」，命名如「档期录入」，之后当 App 用。
-  数据真源 = GitHub 私有仓库 nym5zp777n-wq/photoflow 的 data.json；本页直连 GitHub API 读写，免任何中转。
-  token 仅存你手机本地，页面文件本身不含 token（GitHub 会扫描并拒绝含 token 的文件）。
--->
-<div class="wrap">
+<div class="app">
   <header class="top">
     <div class="logo"></div>
-    <div style="flex:1">
-      <h1>摄影档期录入</h1>
-      <div class="sub">手机录入 · 自动同步到 Mac 提醒事项 / 日历</div>
+    <div class="ttl">
+      <h1>📷 摄影档期</h1>
+      <div class="sub">更新于 <span id="upd">--</span> · 共 <span id="totalCnt">--</span> 条</div>
     </div>
-    <button id="setTokenBtn" title="设置 GitHub token" style="border:none;background:var(--cream-2);border:1px solid var(--line);border-radius:12px;width:42px;height:42px;font-size:20px;cursor:pointer">⚙</button>
+    <button id="setTokenBtn" title="设置 GitHub token">⚙</button>
   </header>
 
-  <section class="card">
-    <h2>录入 / 编辑 <span class="tag" id="modeTag">新增</span></h2>
-    <form id="form" autocomplete="off">
-      <input type="hidden" id="f_id" />
-
-      <div class="field">
-        <label>项目名 *</label>
-        <input id="f_name" type="text" placeholder="如 温莎拍摄" />
-      </div>
-      <div class="grid2">
-        <div class="field">
-          <label>客户</label>
-          <input id="f_client" type="text" placeholder="如 温莎" />
-        </div>
-        <div class="field">
-          <label>档期日 *</label>
-          <input id="f_date" type="date" />
-        </div>
-      </div>
-      <div class="field">
-        <label>类型</label>
-        <select id="f_type">
-          <option value="拍摄">拍摄</option>
-          <option value="活动">活动</option>
-          <option value="婚礼">婚礼</option>
-        </select>
-      </div>
-
-      <div class="sec-title">客户打款</div>
-      <div class="grid2">
-        <div class="field">
-          <label>打款日</label>
-          <input id="f_pay_date" type="date" />
-        </div>
-        <div class="field">
-          <label>金额</label>
-          <input id="f_pay_amount" type="number" inputmode="decimal" placeholder="0" />
-        </div>
-      </div>
-      <div class="field">
-        <label>打款方式</label>
-        <select id="f_pay_method">
-          <option value="">（未填）</option>
-          <option value="微信">微信</option>
-          <option value="支付宝">支付宝</option>
-          <option value="银行转账">银行转账</option>
-          <option value="现金">现金</option>
-          <option value="其他">其他</option>
-        </select>
-      </div>
-
-      <div class="sec-title">公帐到账</div>
-      <div class="grid2">
-        <div class="field">
-          <label>到账日</label>
-          <input id="f_pub_date" type="date" />
-        </div>
-        <div class="field">
-          <label>到账金额</label>
-          <input id="f_pub_amount" type="number" inputmode="decimal" placeholder="0" />
-        </div>
-      </div>
-
-      <div class="sec-title">开票</div>
-      <div class="grid2">
-        <div class="field">
-          <label>发票号</label>
-          <input id="f_inv_no" type="text" placeholder="填了即视为已开票" />
-        </div>
-        <div class="field">
-          <label>开票日</label>
-          <input id="f_inv_date" type="date" />
-        </div>
-      </div>
-      <div class="field">
-        <label>已寄出</label>
-        <select id="f_inv_sent">
-          <option value="false">否</option>
-          <option value="true">是</option>
-        </select>
-      </div>
-
-      <div class="sec-title">交付</div>
-      <div class="grid2">
-        <div class="field">
-          <label>拍摄完成日</label>
-          <input id="f_shoot_done" type="date" />
-        </div>
-        <div class="field">
-          <label>交付完成日</label>
-          <input id="f_deliver_done" type="date" />
-        </div>
-      </div>
-      <div class="field">
-        <label>交付方式</label>
-        <input id="f_deliver_method" type="text" placeholder="如 网盘 / U盘 / 邮寄" />
-      </div>
-
-      <div class="field">
-        <label>备注</label>
-        <input id="f_notes" type="text" placeholder="其他要记的事" />
-      </div>
-
-      <button type="button" class="btn btn-save" id="saveBtn">保存并同步</button>
-      <button type="button" class="btn btn-ghost" id="newBtn">清空（新建）</button>
-    </form>
+  <!-- 视图一：档期（默认） -->
+  <section class="view active" id="view-schedule">
+    <div class="chips" id="chips"></div>
+    <div class="ov" id="ov"></div>
+    <div id="cards"></div>
+    <div id="empty" class="fin-flag info" style="display:none;text-align:center">暂无符合条件的档期</div>
   </section>
 
-  <section class="card">
-    <h2>全部档期 <span class="tag" id="countTag">0</span></h2>
-    <div class="legend">
-      <span><i style="background:var(--sage)"></i>拍摄</span>
-      <span><i style="background:var(--gold)"></i>交付</span>
-      <span><i style="background:var(--peach)"></i>开票</span>
-      <span><i style="background:var(--brick)"></i>结款</span>
-    </div>
-    <div class="list" id="list"></div>
+  <!-- 视图二：录入 -->
+  <section class="view" id="view-input">
+    <section class="card">
+      <h2>录入 / 编辑 <span class="tag" id="modeTag">新增</span></h2>
+      <form id="form" autocomplete="off">
+        <input type="hidden" id="f_id" />
+
+        <div class="field">
+          <label>项目名 *</label>
+          <input id="f_name" type="text" placeholder="如 温莎拍摄" />
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <label>客户</label>
+            <input id="f_client" type="text" placeholder="如 温莎" />
+          </div>
+          <div class="field">
+            <label>档期日 *</label>
+            <input id="f_date" type="date" />
+          </div>
+        </div>
+        <div class="field">
+          <label>类型</label>
+          <select id="f_type">
+            <option value="拍摄">拍摄</option>
+            <option value="活动">活动</option>
+            <option value="婚礼">婚礼</option>
+          </select>
+        </div>
+
+        <div class="sec-title">客户打款</div>
+        <div class="grid2">
+          <div class="field">
+            <label>打款日</label>
+            <input id="f_pay_date" type="date" />
+          </div>
+          <div class="field">
+            <label>金额</label>
+            <input id="f_pay_amount" type="number" inputmode="decimal" placeholder="0" />
+          </div>
+        </div>
+        <div class="field">
+          <label>打款方式</label>
+          <select id="f_pay_method">
+            <option value="">（未填）</option>
+            <option value="微信">微信</option>
+            <option value="支付宝">支付宝</option>
+            <option value="银行转账">银行转账</option>
+            <option value="现金">现金</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+
+        <div class="sec-title">公帐到账</div>
+        <div class="grid2">
+          <div class="field">
+            <label>到账日</label>
+            <input id="f_pub_date" type="date" />
+          </div>
+          <div class="field">
+            <label>到账金额</label>
+            <input id="f_pub_amount" type="number" inputmode="decimal" placeholder="0" />
+          </div>
+        </div>
+
+        <div class="sec-title">开票</div>
+        <div class="grid2">
+          <div class="field">
+            <label>发票号</label>
+            <input id="f_inv_no" type="text" placeholder="填了即视为已开票" />
+          </div>
+          <div class="field">
+            <label>开票日</label>
+            <input id="f_inv_date" type="date" />
+          </div>
+        </div>
+        <div class="field">
+          <label>已寄出</label>
+          <select id="f_inv_sent">
+            <option value="false">否</option>
+            <option value="true">是</option>
+          </select>
+        </div>
+
+        <div class="sec-title">交付</div>
+        <div class="grid2">
+          <div class="field">
+            <label>拍摄完成日</label>
+            <input id="f_shoot_done" type="date" />
+          </div>
+          <div class="field">
+            <label>交付完成日</label>
+            <input id="f_deliver_done" type="date" />
+          </div>
+        </div>
+        <div class="field">
+          <label>交付方式</label>
+          <input id="f_deliver_method" type="text" placeholder="如 网盘 / U盘 / 邮寄" />
+        </div>
+
+        <div class="field">
+          <label>备注</label>
+          <input id="f_notes" type="text" placeholder="其他要记的事" />
+        </div>
+
+        <button type="button" class="btn btn-save" id="saveBtn">保存并同步</button>
+        <button type="button" class="btn btn-ghost" id="newBtn">清空（新建）</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>全部档期 <span class="tag" id="countTag">0</span></h2>
+      <div class="legend">
+        <span><i style="background:var(--sage)"></i>拍摄</span>
+        <span><i style="background:var(--gold)"></i>交付</span>
+        <span><i style="background:var(--peach)"></i>开票</span>
+        <span><i style="background:var(--brick)"></i>结款</span>
+      </div>
+      <div class="list" id="list"></div>
+    </section>
   </section>
 
-  <footer>
-    数据真源：GitHub 私有仓库 <code>nym5zp777n-wq/photoflow</code> 的 data.json（手机直连，免中转）<br/>
-    首次使用点右上角 ⚙ 粘贴 GitHub token（仅存本机）。<br/>
-    Mac 后台守护进程每 5 分钟把数据对账成「提醒事项 + 日历」。点任意一行可载入编辑。
-  </footer>
+  <!-- 视图三：财务 -->
+  <section class="view" id="view-finance">
+    <div id="fin"></div>
+    <p class="sub" style="text-align:center;margin-top:8px">口径：直客都应开票 · 介绍都不用开票</p>
+  </section>
+
+  <nav class="tabbar">
+    <div class="tab active" data-view="schedule"><span class="ic">🗓️</span>档期</div>
+    <div class="tab" data-view="input"><span class="ic">📝</span>录入</div>
+    <div class="tab" data-view="finance"><span class="ic">💰</span>财务</div>
+  </nav>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -233,8 +354,10 @@
 (function(){
   "use strict";
 
-  // ===== GitHub 直连配置（免 Worker；token 由你手机上粘贴，存本地，不写进本文件）=====
-  // 注意：token 不要写死在 HTML 里（GitHub 会扫描并拒绝）。首次打开时点右上角 ⚙ 粘贴一次即可，存在手机本地。
+  // ===== 内嵌快照兜底（离线 / file:// 打开时用）=====
+  const DATA_SNAPSHOT = {"updatedAt": "2026-07-23T15:40:12.517144+08:00", "projects": [{"id": "p-20261025-00", "name": "宁波婚礼", "client": "", "date": "2026-10-25", "type": "婚礼", "payment": {"date": "", "amount": 1600, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "", "deliverDone": "", "deliverMethod": "", "notes": "（双机，1600，+300（摄像介绍费，待推进，对接具体信息）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260815-01", "name": "童行园毕业典礼", "client": "直客", "date": "2026-08-15", "type": "活动", "payment": {"date": "", "amount": 1000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "", "deliverDone": "", "deliverMethod": "", "notes": "（直客，未开票1000", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260827-02", "name": "温莎", "client": "", "date": "2026-08-27", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "", "deliverDone": "", "deliverMethod": "", "notes": "", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260830-03", "name": "上午慈溪百日宴", "client": "", "date": "2026-08-30", "type": "活动", "payment": {"date": "", "amount": 1000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "", "deliverDone": "", "deliverMethod": "", "notes": "1000", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260724-04", "name": "上午艾毅幼儿园毕业典礼", "client": "直客", "date": "2026-07-24", "type": "活动", "payment": {"date": "", "amount": 1000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "", "deliverDone": "", "deliverMethod": "", "notes": "（直客，未开票，1000", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260725-05", "name": "活动", "client": "沃总", "date": "2026-07-25", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "", "deliverDone": "", "deliverMethod": "", "notes": "（沃总", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260728-06", "name": "活动", "client": "欧阳", "date": "2026-07-28", "type": "活动", "payment": {"date": "", "amount": 1000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "", "deliverDone": "", "deliverMethod": "", "notes": "（欧阳 1000", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260729-07", "name": "活动", "client": "欧阳", "date": "2026-07-29", "type": "活动", "payment": {"date": "", "amount": 1000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "", "deliverDone": "", "deliverMethod": "", "notes": "（欧阳 1000", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260730-08", "name": "活动", "client": "欧阳", "date": "2026-07-30", "type": "活动", "payment": {"date": "", "amount": 1000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "", "deliverDone": "", "deliverMethod": "", "notes": "（欧阳 1000", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260731-09", "name": "温莎幼儿园", "client": "直客", "date": "2026-07-31", "type": "活动", "payment": {"date": "", "amount": 15, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "", "deliverDone": "", "deliverMethod": "", "notes": "（直客，未开票，15号前开票，750", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260718-10", "name": "活动", "client": "沃总", "date": "2026-07-18", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-07-18", "deliverDone": "", "deliverMethod": "", "notes": "（沃总", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260719-11", "name": "上午活动", "client": "冰哥", "date": "2026-07-19", "type": "活动", "payment": {"date": "", "amount": 800, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-07-19", "deliverDone": "", "deliverMethod": "", "notes": "（冰哥 800", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260717-12", "name": "温莎幼儿园", "client": "直客", "date": "2026-07-17", "type": "活动", "payment": {"date": "", "amount": 15, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-07-17", "deliverDone": "", "deliverMethod": "", "notes": "（直客，未开票，15号前开票，750", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260714-13", "name": "温莎幼儿园", "client": "直客", "date": "2026-07-14", "type": "活动", "payment": {"date": "", "amount": 15, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-07-14", "deliverDone": "", "deliverMethod": "", "notes": "（直客，未开票，15号前开票，750", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260715-14", "name": "小海绵毕业典礼", "client": "", "date": "2026-07-15", "type": "活动", "payment": {"date": "", "amount": 800, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-07-15", "deliverDone": "", "deliverMethod": "", "notes": "800 已开票已结", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260707-15", "name": "双机位活动", "client": "直客", "date": "2026-07-07", "type": "活动", "payment": {"date": "", "amount": 2700, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-07-07", "deliverDone": "", "deliverMethod": "", "notes": "（直客，已开票2700（开票金额", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260708-16", "name": "单机位活动", "client": "直客", "date": "2026-07-08", "type": "活动", "payment": {"date": "", "amount": 1200, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-07-08", "deliverDone": "", "deliverMethod": "", "notes": "（直客，已开1200", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260711-17", "name": "有艺剧团服装拍摄", "client": "沃总", "date": "2026-07-11", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-07-11", "deliverDone": "", "deliverMethod": "", "notes": "（沃总", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260703-18", "name": "温莎毕业典礼", "client": "直客", "date": "2026-07-03", "type": "活动", "payment": {"date": "", "amount": 15, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-07-03", "deliverDone": "", "deliverMethod": "", "notes": "（直客，未开票，15号前开票，750", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260702-19", "name": "伊莱瑞德毕业典礼", "client": "直客", "date": "2026-07-02", "type": "活动", "payment": {"date": "", "amount": 2000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-07-02", "deliverDone": "", "deliverMethod": "", "notes": "（直客，已开票未结款 2000", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260701-20", "name": "女企业家活动", "client": "冰哥", "date": "2026-07-01", "type": "活动", "payment": {"date": "", "amount": 800, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-07-01", "deliverDone": "", "deliverMethod": "", "notes": "（半天，冰哥，800", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260704-21", "name": "活动", "client": "沃总", "date": "2026-07-04", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-07-04", "deliverDone": "", "deliverMethod": "", "notes": "（沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260601-22", "name": "伊莱瑞德六一活动", "client": "", "date": "2026-06-01", "type": "活动", "payment": {"date": "", "amount": 2000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-06-01", "deliverDone": "", "deliverMethod": "", "notes": "（已开票，2000", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260627-23", "name": "下午全家福", "client": "直客", "date": "2026-06-27", "type": "活动", "payment": {"date": "", "amount": 1200, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-06-27", "deliverDone": "", "deliverMethod": "", "notes": "（直客，已开票已结款 1200", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260627-24", "name": "江北艾毅毕业典礼", "client": "直客", "date": "2026-06-27", "type": "活动", "payment": {"date": "", "amount": 1000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-06-27", "deliverDone": "", "deliverMethod": "", "notes": "（直客，已开票已结款1000", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260628-25", "name": "学速表彰活动", "client": "直客", "date": "2026-06-28", "type": "活动", "payment": {"date": "", "amount": 2400, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-06-28", "deliverDone": "", "deliverMethod": "", "notes": "（直客已开票已结款 2400", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260625-26", "name": "宁海工地演练", "client": "同行", "date": "2026-06-25", "type": "活动", "payment": {"date": "", "amount": 1200, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-06-25", "deliverDone": "", "deliverMethod": "", "notes": "（同行，来源：翔 ，1200", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260623-27", "name": "宁海工地演练", "client": "同行", "date": "2026-06-23", "type": "活动", "payment": {"date": "", "amount": 1700, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-06-23", "deliverDone": "", "deliverMethod": "", "notes": "（同行来源：翔 ，1700", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260620-28", "name": "活动", "client": "同行", "date": "2026-06-20", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-06-20", "deliverDone": "", "deliverMethod": "", "notes": "（同行来源：沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260619-29", "name": "端午活动", "client": "同行", "date": "2026-06-19", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-06-19", "deliverDone": "", "deliverMethod": "", "notes": "（同行来源：沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260618-30", "name": "温莎父亲节", "client": "直客", "date": "2026-06-18", "type": "活动", "payment": {"date": "", "amount": 750, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-06-18", "deliverDone": "", "deliverMethod": "", "notes": "（直客已开票已结款，750", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260616-31", "name": "阿信活动", "client": "欧阳", "date": "2026-06-16", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-06-16", "deliverDone": "", "deliverMethod": "", "notes": "（来源：欧阳", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260601-32", "name": "温莎六一活动", "client": "直客", "date": "2026-06-01", "type": "活动", "payment": {"date": "", "amount": 750, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-06-01", "deliverDone": "", "deliverMethod": "", "notes": "（（直客已开票已结款，750", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260601-33", "name": "艾毅六一活动", "client": "", "date": "2026-06-01", "type": "活动", "payment": {"date": "", "amount": 1000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-06-01", "deliverDone": "", "deliverMethod": "", "notes": "（已开票，已结1000", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260606-34", "name": "全天国浩会议", "client": "直客", "date": "2026-06-06", "type": "活动", "payment": {"date": "", "amount": 2700, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-06-06", "deliverDone": "", "deliverMethod": "", "notes": "（直客已开票 2700，已结款", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260607-35", "name": "半天国浩会议", "client": "直客", "date": "2026-06-07", "type": "活动", "payment": {"date": "", "amount": 1000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-06-07", "deliverDone": "", "deliverMethod": "", "notes": "（直客已开票 1000已结款", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260612-36", "name": "温莎生日会", "client": "直客", "date": "2026-06-12", "type": "活动", "payment": {"date": "", "amount": 750, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-06-12", "deliverDone": "", "deliverMethod": "", "notes": "（直客已开票已结款，750", "source": "直客", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260613-37", "name": "下午活动", "client": "同行", "date": "2026-06-13", "type": "活动", "payment": {"date": "", "amount": 800, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-06-13", "deliverDone": "", "deliverMethod": "", "notes": "（同行，来源：tommy，未结款800", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260529-38", "name": "温莎自助餐", "client": "", "date": "2026-05-29", "type": "活动", "payment": {"date": "", "amount": 750, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-05-29", "deliverDone": "", "deliverMethod": "", "notes": "（已开票已结款750", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260524-39", "name": "上午慈溪活动", "client": "冰哥", "date": "2026-05-24", "type": "活动", "payment": {"date": "", "amount": 800, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-05-24", "deliverDone": "", "deliverMethod": "", "notes": "（半天，冰哥，800", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260522-40", "name": "温莎户外活动", "client": "", "date": "2026-05-22", "type": "活动", "payment": {"date": "", "amount": 750, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-05-22", "deliverDone": "", "deliverMethod": "", "notes": "（已开票已结款750", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260520-41", "name": "秀水街活动", "client": "沃总", "date": "2026-05-20", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-05-20", "deliverDone": "", "deliverMethod": "", "notes": "（沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260515-42", "name": "温莎生日会", "client": "", "date": "2026-05-15", "type": "活动", "payment": {"date": "", "amount": 750, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-05-15", "deliverDone": "", "deliverMethod": "", "notes": "（已开票已结款750", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260517-43", "name": "宁波帮博物馆活动", "client": "欧阳", "date": "2026-05-17", "type": "活动", "payment": {"date": "", "amount": 1000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-05-17", "deliverDone": "", "deliverMethod": "", "notes": "（未结款，欧阳，1000", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260518-44", "name": "伊莱瑞德校鉴拍摄", "client": "", "date": "2026-05-18", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-05-18", "deliverDone": "", "deliverMethod": "", "notes": "（未结款", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260513-45", "name": "伊莱瑞德春游", "client": "", "date": "2026-05-13", "type": "活动", "payment": {"date": "", "amount": 1000, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-05-13", "deliverDone": "", "deliverMethod": "", "notes": "（已开票未结款，1000", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260512-46", "name": "伊莱瑞德毕业季", "client": "", "date": "2026-05-12", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-05-12", "deliverDone": "", "deliverMethod": "", "notes": "（未结款", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260509-47", "name": "温莎母亲节", "client": "", "date": "2026-05-09", "type": "活动", "payment": {"date": "", "amount": 750, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "已开票", "date": "", "sent": false}, "shootDone": "2026-05-09", "deliverDone": "", "deliverMethod": "", "notes": "（已开票已结款750", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260501-48", "name": "海曙印象城活动", "client": "沃总", "date": "2026-05-01", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-05-01", "deliverDone": "", "deliverMethod": "", "notes": "（沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260503-49", "name": "活动", "client": "沃总", "date": "2026-05-03", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-05-03", "deliverDone": "", "deliverMethod": "", "notes": "（沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260428-50", "name": "文旅共兴", "client": "冰哥", "date": "2026-04-28", "type": "活动", "payment": {"date": "", "amount": 800, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-04-28", "deliverDone": "", "deliverMethod": "", "notes": "（半天，冰哥，800", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260424-51", "name": "鄞州龙湖天街", "client": "沃总", "date": "2026-04-24", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-04-24", "deliverDone": "", "deliverMethod": "", "notes": "（沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260409-52", "name": "活动", "client": "沃总", "date": "2026-04-09", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-04-09", "deliverDone": "", "deliverMethod": "", "notes": "（沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260411-53", "name": "诺丁汉集体婚礼", "client": "沃总", "date": "2026-04-11", "type": "婚礼", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-04-11", "deliverDone": "", "deliverMethod": "", "notes": "（沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260404-54", "name": "活动", "client": "沃总", "date": "2026-04-04", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-04-04", "deliverDone": "", "deliverMethod": "", "notes": "（沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260328-55", "name": "活动", "client": "沃总", "date": "2026-03-28", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-03-28", "deliverDone": "", "deliverMethod": "", "notes": "（沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260228-56", "name": "甬宁新天地", "client": "沃总", "date": "2026-02-28", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-02-28", "deliverDone": "", "deliverMethod": "", "notes": "（沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}, {"id": "p-20260216-57", "name": "活动", "client": "沃总", "date": "2026-02-16", "type": "活动", "payment": {"date": "", "amount": 0, "method": ""}, "publicAccount": {"date": "", "amount": 0}, "invoice": {"no": "", "date": "", "sent": false}, "shootDone": "2026-02-16", "deliverDone": "", "deliverMethod": "", "notes": "（沃总）", "source": "介绍", "displayName": "", "mirror": {"calendar": {"exists": false}, "reminders": {"matched": false}}}]};
+
+  // ===== GitHub 直连配置（token 存手机本地，不写进本文件）=====
   var GH_REPO   = "nym5zp777n-wq/photoflow";
   var GH_BRANCH = "main";
   var GH_API    = "https://api.github.com/repos/" + GH_REPO + "/contents/data.json";
@@ -243,57 +366,215 @@
   function getToken(){ try { return localStorage.getItem("gh_token") || ""; } catch(e){ return ""; } }
   function setToken(t){ try { localStorage.setItem("gh_token", t); } catch(e){} }
 
-  // 4 个状态点的推导规则（与 reconcile.py 必须一致）：
+  // ===== 统一状态判定 =====
+  var STEP_KEYS   = ["shoot","deliver","invoice","paid"];
+  var STEP_LABELS = ["拍摄","交付","开票","结款"];
+
+  // 4 状态点（KEY 用 shoot/deliver/invoice/paid，与 reconcile.py 一致）：
   //   拍摄 = shootDone 非空
   //   交付 = deliverDone 非空
   //   开票 = invoice.no 非空
   //   结款 = publicAccount.amount > 0
-  function statusOf(p){
+  function stepState(p){
     return {
       shoot:   !!(p.shootDone && String(p.shootDone).trim() !== ""),
       deliver: !!(p.deliverDone && String(p.deliverDone).trim() !== ""),
       invoice: !!(p.invoice && p.invoice.no && String(p.invoice.no).trim() !== ""),
-      settle:  !!(p.publicAccount && Number(p.publicAccount.amount || 0) > 0),
+      paid:    !!(p.publicAccount && parseFloat(p.publicAccount.amount || 0) > 0),
     };
   }
-  var STEP_KEYS = ["shoot","deliver","invoice","settle"];
-  var STEP_CN  = {shoot:"拍摄", deliver:"交付", invoice:"开票", settle:"结款"};
+  function stepDoneCount(p){
+    var s = stepState(p);
+    return (s.shoot?1:0) + (s.deliver?1:0) + (s.invoice?1:0) + (s.paid?1:0);
+  }
 
-  var DATA = { updatedAt:"", projects:[] };
-  var editingId = null;
+  // 来源推导：优先用 source 字段；缺失时 client=='直客'→直客，其余→介绍
+  function getSource(p){
+    if(p.source === "直客" || p.source === "介绍") return p.source;
+    return (p.client === "直客") ? "直客" : "介绍";
+  }
+  // 展示名：优先 displayName，否则 name
+  function dispName(p){ return (p.displayName && String(p.displayName).trim()) || p.name || "(未命名)"; }
+  // 营收口径：公帐>0 用公帐金额，否则用 payment 金额
+  function projectRevenue(p){
+    var pub = parseFloat((p.publicAccount && p.publicAccount.amount) || 0);
+    if(pub > 0) return pub;
+    return parseFloat((p.payment && p.payment.amount) || 0);
+  }
+  function invoiceAmount(p){ return stepState(p).invoice ? projectRevenue(p) : 0; }
+  // 日历同步标记
+  function calSynced(p){ return !!(p.mirror && p.mirror.calendar && p.mirror.calendar.exists); }
+
+  // ===== 全局内存数据 =====
+  var DATA = JSON.parse(JSON.stringify(DATA_SNAPSHOT));
+  var projects = [];           // 由 DATA.projects 按日期倒序派生
+  var curSource = "全部";      // 档期筛选
+  var expanded = new Set();    // 展开卡片 id 集合
 
   function $(id){ return document.getElementById(id); }
   function num(v){ var n = Number(v||0); return isNaN(n) ? 0 : n; }
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, function(c){
     return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function fmtMD(d){ return d ? String(d).replace(/-/g,"/") : ""; }
+  function yuan(n){ return "¥" + Math.round(n).toLocaleString(); }
 
   function toast(msg){
     var t = $("toast"); t.textContent = msg; t.classList.add("show");
-    clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove("show"); }, 1800);
+    clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove("show"); }, 2000);
   }
 
-  // ---- 列表渲染 ----
-  function renderList(){
-    var projs = DATA.projects || [];
-    $("countTag").textContent = projs.length;
-    var box = $("list");
-    if(!projs.length){ box.innerHTML = '<div class="empty">还没有档期，先在上方录入一个吧。</div>'; return; }
-    // 按日期升序
-    projs = projs.slice().sort(function(a,b){ return (a.date||"") < (b.date||"") ? -1 : 1; });
-    var html = "";
-    projs.forEach(function(p){
-      var s = statusOf(p);
-      var dots = "";
-      STEP_KEYS.forEach(function(k){
-        dots += '<i class="' + (s[k] ? "on "+k : "") + '"></i>';
+  // ===== 数据加载 =====
+  function authHeaders(){ return { "Authorization": "Bearer " + getToken(), "Accept": "application/vnd.github+json" }; }
+  function needToken(){ if(!getToken()){ toast("请先点右上角 ⚙ 粘贴 GitHub token"); return false; } return true; }
+
+  function loadData(){
+    if(!getToken()){
+      DATA = JSON.parse(JSON.stringify(DATA_SNAPSHOT));
+      refreshAll();
+      toast("未设置 token，当前为只读快照，点右上角 ⚙ 设置");
+      return;
+    }
+    fetch(GH_API + "?t=" + Date.now(), { headers: authHeaders(), cache:"no-store" })
+      .then(function(r){
+        if(r.status === 401) throw new Error("token 无效或无权限");
+        if(r.status === 404) return null;
+        if(!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function(d){
+        if(!d || !d.content){
+          DATA = JSON.parse(JSON.stringify(DATA_SNAPSHOT));
+          toast("离线模式：显示内置快照");
+        } else {
+          DATA = JSON.parse(b64dec(d.content));
+          if(!DATA || !Array.isArray(DATA.projects)) DATA = JSON.parse(JSON.stringify(DATA_SNAPSHOT));
+        }
+        refreshAll();
+      })
+      .catch(function(err){
+        DATA = JSON.parse(JSON.stringify(DATA_SNAPSHOT));
+        toast("离线模式：显示内置快照");
+        refreshAll();
       });
-      var title = p.name || "(未命名)";
+  }
+
+  // ===== 统一重算并渲染 =====
+  function refreshAll(){
+    projects = (DATA.projects || []).slice().sort(function(a,b){
+      return (b.date||"") < (a.date||"") ? -1 : (b.date||"") > (a.date||"") ? 1 : 0;
+    });
+    // header
+    $("upd").textContent = DATA.updatedAt ? DATA.updatedAt.replace("T"," ").replace(/\..*/,"") : "--";
+    $("totalCnt").textContent = projects.length;
+    // 各视图
+    renderOverview();
+    renderCards();
+    renderInputList();
+    renderFinance();
+  }
+
+  // ===== 档期视图 =====
+  function buildChips(){
+    var el = $("chips"); el.innerHTML = "";
+    ["全部","直客","介绍"].forEach(function(s){
+      var b = document.createElement("button");
+      b.className = "chip" + (s === curSource ? " active" : "");
+      b.textContent = s === "全部" ? "全部来源" : s;
+      b.onclick = function(){ curSource = s; buildChips(); renderCards(); };
+      el.appendChild(b);
+    });
+  }
+
+  function renderOverview(){
+    var ov = $("ov"); ov.innerHTML = "";
+    var total = projects.length;
+    var doneShoot = projects.filter(function(p){ return stepState(p).shoot; }).length;
+    var totalRev = projects.reduce(function(s,p){ return s + projectRevenue(p); }, 0);
+    var invAmt = projects.reduce(function(s,p){ return s + invoiceAmount(p); }, 0);
+    [
+      ["总档期", total, ""],
+      ["已拍摄", doneShoot, ""],
+      ["总营收", yuan(totalRev), "peach"],
+      ["已开票", yuan(invAmt), "gold"],
+    ].forEach(function(row){
+      var d = document.createElement("div");
+      d.className = "box";
+      d.innerHTML = '<div class="lbl">'+row[0]+'</div><div class="num '+row[2]+'">'+row[1]+'</div>';
+      ov.appendChild(d);
+    });
+  }
+
+  function renderCards(){
+    var wrap = $("cards"); wrap.innerHTML = "";
+    var filtered = projects.filter(function(p){ return curSource === "全部" || getSource(p) === curSource; });
+    $("empty").style.display = filtered.length ? "none" : "block";
+    filtered.forEach(function(p){
+      var st = stepState(p);
+      var src = getSource(p);
+      var id = p.id;
+      var doneN = stepDoneCount(p);
+      var parts = (p.date||"").split("-");
+      var yy = parts[0]||"", mm = parts[1]||"", dd = parts[2]||"";
+      var sdots = STEP_LABELS.map(function(lab,i){
+        return '<span class="sdot '+(st[STEP_KEYS[i]]?"on":"")+'" title="'+lab+'"></span>';
+      }).join("");
+      var calBadge = calSynced(p)
+        ? '<span class="cal-badge synced">📅 已同步</span>'
+        : '<span class="cal-badge unsynced">📅 未同步</span>';
+      var rev = projectRevenue(p);
+      var card = document.createElement("div");
+      card.className = "scard" + (expanded.has(id) ? " open" : "");
+      card.innerHTML =
+        '<div class="card-head">' +
+          '<div class="date-badge"><div class="d">'+(dd||"?")+'</div><div class="m">'+yy+'/'+mm+'</div></div>' +
+          '<div class="card-main">' +
+            '<div class="card-title">'+esc(dispName(p)) +
+              '<span class="tag '+(src==="直客"?"direct":"friend")+'">'+src+'</span>' +
+              '<span class="tag type">'+(p.type||"—")+'</span></div>' +
+            '<div class="card-sub"><span class="sdots" title="拍摄/交付/开票/结款">'+sdots+'</span>' +
+              '<span style="font-size:12px;color:var(--ink-soft)">'+doneN+'/4</span>'+calBadge+'</div>' +
+          '</div>' +
+          '<span class="chev">▾</span>' +
+        '</div>' +
+        '<div class="card-detail"><div class="detail-inner">' +
+          '<div class="rows">' +
+            '<div class="row2"><div class="k">日期</div><div class="v">'+fmtMD(p.date)+'</div></div>' +
+            '<div class="row2"><div class="k">客户 / 来源</div><div class="v">'+(p.client||"—")+' · '+src+'</div></div>' +
+            '<div class="row2"><div class="k">营收</div><div class="v money">'+(rev>0?yuan(rev):"—")+'</div></div>' +
+            '<div class="row2"><div class="k">类型</div><div class="v">'+(p.type||"—")+'</div></div>' +
+          '</div>' +
+          '<div class="steps-row">' +
+            STEP_LABELS.map(function(lab,i){
+              return '<div class="step '+(st[STEP_KEYS[i]]?"done":"")+'"><div class="sd">'+(st[STEP_KEYS[i]]?"✓":lab[0])+'</div><div class="sl">'+lab+'</div></div>';
+            }).join("") +
+          '</div>' +
+          '<div class="notes-box">'+(p.notes ? "📝 "+esc(p.notes) : "暂无备注")+'</div>' +
+        '</div></div>';
+      card.querySelector(".card-head").onclick = function(){
+        if(expanded.has(id)) expanded.delete(id); else expanded.add(id);
+        card.classList.toggle("open");
+      };
+      wrap.appendChild(card);
+    });
+  }
+
+  // ===== 录入视图：列表（小圆点复用 stepState）=====
+  function renderInputList(){
+    var box = $("list");
+    $("countTag").textContent = projects.length;
+    if(!projects.length){ box.innerHTML = '<div class="empty">还没有档期，先在上方录入一个吧。</div>'; return; }
+    var html = "";
+    projects.forEach(function(p){
+      var s = stepState(p);
+      var dots = "";
+      STEP_KEYS.forEach(function(k){ dots += '<i class="'+(s[k]?"on "+k:"")+'"></i>'; });
+      var title = dispName(p);
       if(p.client) title += " · " + p.client;
-      html += '<div class="row" data-id="'+esc(p.id)+'">'
-            +   '<div class="info"><div class="nm">'+esc(title)+'</div>'
-            +   '<div class="dt">'+esc(p.date||"未设日期")+' ・ '+(STEP_CN[p.type]||p.type||"")+'</div></div>'
-            +   '<div class="dots">'+dots+'</div>'
-            + '</div>';
+      html += '<div class="row" data-id="'+esc(p.id)+'">' +
+                '<div class="info"><div class="nm">'+esc(title)+'</div>' +
+                '<div class="dt">'+esc(p.date||"未设日期")+' ・ '+(p.type||"")+'</div></div>' +
+                '<div class="dots">'+dots+'</div>' +
+              '</div>';
     });
     box.innerHTML = html;
     Array.prototype.forEach.call(box.querySelectorAll(".row"), function(r){
@@ -301,10 +582,47 @@
     });
   }
 
-  // ---- 表单 <-> 数据 ----
+  // ===== 财务视图：按来源分组 =====
+  function renderFinance(){
+    var el = $("fin"); el.innerHTML = "";
+    ["直客","介绍"].forEach(function(src){
+      var list = projects.filter(function(p){ return getSource(p) === src; });
+      var rev = list.reduce(function(s,p){ return s + projectRevenue(p); }, 0);
+      var invAmt = list.reduce(function(s,p){ return s + invoiceAmount(p); }, 0);
+      var uninv = rev - invAmt;
+      var should = src === "直客" ? rev : 0;
+      var gap = should - invAmt;
+      var pct = should > 0 ? Math.min(100, Math.round(invAmt/should*100)) : (invAmt>0?100:0);
+      var flag;
+      if(src === "直客"){
+        flag = gap > 0
+          ? '<div class="fin-flag warn">⚠ 直客还差 '+yuan(gap)+' 未开票（应开未齐）</div>'
+          : '<div class="fin-flag ok">✓ 直客应开已齐</div>';
+      } else {
+        flag = invAmt > 0
+          ? '<div class="fin-flag info">介绍单已开票 '+yuan(invAmt)+'（按口径介绍无需开票）</div>'
+          : '<div class="fin-flag info">介绍单无需开票</div>';
+      }
+      var card = document.createElement("div");
+      card.className = "fin-card" + (src === "介绍" ? " friend" : "");
+      card.innerHTML =
+        '<div class="fin-head"><span class="fin-name">'+src+'</span><span class="fin-cnt">'+list.length+' 单</span></div>' +
+        '<div class="amt-grid">' +
+          '<div class="amt rev"><div class="k">总营收</div><div class="v">'+yuan(rev)+'</div></div>' +
+          '<div class="amt inv"><div class="k">已开票</div><div class="v">'+yuan(invAmt)+'</div></div>' +
+          '<div class="amt uninv"><div class="k">未开票</div><div class="v">'+yuan(uninv)+'</div></div>' +
+        '</div>' +
+        '<div class="bar-wrap"><div class="bar-label"><span>应开 vs 实开</span><b>'+yuan(should)+' / '+yuan(invAmt)+'</b></div>' +
+          '<div class="bar"><i style="width:'+pct+'%"></i></div></div>' +
+        flag;
+      el.appendChild(card);
+    });
+  }
+
+  // ===== 表单 <-> 数据 =====
   function readForm(){
     return {
-      id: $("f_id").value || ("p-" + Date.now() + "-" + Math.random().toString(36).slice(2,7)),
+      id: $("f_id").value || ("p-" + new Date().toISOString().slice(0,10).replace(/-/g,"") + "-" + Math.random().toString(36).slice(2,7)),
       name: $("f_name").value.trim(),
       client: $("f_client").value.trim(),
       date: $("f_date").value,
@@ -351,7 +669,6 @@
   }
 
   function clearForm(){
-    editingId = null;
     $("form").reset();
     $("f_id").value = "";
     $("f_type").value = "拍摄";
@@ -363,44 +680,19 @@
   function loadIntoForm(id){
     var p = (DATA.projects||[]).filter(function(x){ return x.id === id; })[0];
     if(!p) return;
-    editingId = id;
     writeForm(p);
     $("modeTag").textContent = "编辑中";
+    switchView("input");
     window.scrollTo({top:0, behavior:"smooth"});
   }
 
-  // ---- 拉取 / 保存（直连 GitHub API）----
-  function authHeaders(){
-    return { "Authorization": "Bearer " + getToken(), "Accept": "application/vnd.github+json" };
-  }
-
-  function needToken(){ if(!getToken()){ toast("请先点右上角 ⚙ 粘贴 GitHub token"); return false; } return true; }
-
-  function fetchData(){
-    if(!getToken()){ DATA = { updatedAt:"", projects:[] }; renderList(); return; }
-    return fetch(GH_API + "?t=" + Date.now(), { headers: authHeaders(), cache:"no-store" })
-      .then(function(r){
-        if(r.status === 401) throw new Error("token 无效或无权限");
-        if(r.status === 404) return null;               // 仓库里还没 data.json
-        if(!r.ok) throw new Error("HTTP " + r.status);
-        return r.json();
-      })
-      .then(function(d){
-        if(!d || !d.content){ DATA = { updatedAt:"", projects:[] }; renderList(); return; }
-        DATA = JSON.parse(b64dec(d.content));
-        if(!Array.isArray(DATA.projects)) DATA.projects = [];
-        renderList();
-      })
-      .catch(function(err){ toast("拉取失败：" + err.message); });
-  }
-
+  // ===== 保存（GitHub PUT）=====
   function save(){
     var name = $("f_name").value.trim();
     var date = $("f_date").value;
     if(!name || !date){ toast("请填「项目名」和「档期日」"); return; }
     if(!needToken()) return;
 
-    // 先拉最新全量 + 拿到 sha（用于 PUT 覆盖）
     fetch(GH_API + "?t=" + Date.now(), { headers: authHeaders(), cache:"no-store" })
       .then(function(r){
         if(r.status === 404) return { projects: [], sha: null };
@@ -411,12 +703,18 @@
         });
       })
       .then(function(remote){
-        var projects = remote.projects.slice();
+        var arr = remote.projects.slice();
         var proj = readForm();
         var idx = -1;
-        for(var i=0;i<projects.length;i++){ if(projects[i].id === proj.id){ idx = i; break; } }
-        if(idx >= 0) projects[idx] = proj; else projects.push(proj);
-        var payload = { updatedAt: new Date().toISOString(), projects: projects };
+        for(var i=0;i<arr.length;i++){ if(arr[i].id === proj.id){ idx = i; break; } }
+        if(idx >= 0){
+          // 保留表单未覆盖的字段（来源/展示名/日历镜像）
+          ["mirror","source","displayName"].forEach(function(k){ if(!(k in proj) || !proj[k]) proj[k] = arr[idx][k]; });
+          arr[idx] = proj;
+        } else {
+          arr.push(proj);
+        }
+        var payload = { updatedAt: new Date().toISOString(), projects: arr };
         var body = { message: "update data.json via mobile", content: b64enc(JSON.stringify(payload)), branch: GH_BRANCH };
         if(remote.sha) body.sha = remote.sha;
         return fetch(GH_API, {
@@ -427,7 +725,16 @@
       })
       .then(function(res){
         if(res.ok){
-          DATA = null; fetchData(); clearForm(); toast("已同步 ✓");
+          // 更新内存 + 重渲染 + 清空表单
+          var proj = readForm();
+          var arr = DATA.projects || [];
+          var found = false;
+          for(var i=0;i<arr.length;i++){ if(arr[i].id === proj.id){ arr[i] = proj; found = true; break; } }
+          if(!found) arr.push(proj);
+          DATA.projects = arr;
+          refreshAll();
+          clearForm();
+          toast("已同步 ✓");
         } else {
           toast("同步失败：" + res.status);
         }
@@ -435,15 +742,25 @@
       .catch(function(err){ toast("保存出错：" + err.message); });
   }
 
-  // ---- 绑定 ----
+  // ===== Tab 切换 =====
+  function switchView(v){
+    document.querySelectorAll(".view").forEach(function(s){ s.classList.remove("active"); });
+    var tv = $("view-" + v); if(tv) tv.classList.add("active");
+    document.querySelectorAll(".tab").forEach(function(t){ t.classList.toggle("active", t.dataset.view === v); });
+  }
+
+  // ===== 绑定 =====
   $("saveBtn").addEventListener("click", save);
   $("newBtn").addEventListener("click", clearForm);
   $("setTokenBtn").addEventListener("click", function(){
     var t = prompt("粘贴你的 GitHub token（仅限 photoflow 仓库读写权限即可）：\n\ntoken 只存在你这部手机本地，不会上传。", getToken());
-    if(t && t.trim()){ setToken(t.trim()); toast("token 已保存 ✓"); fetchData(); }
+    if(t && t.trim()){ setToken(t.trim()); toast("token 已保存 ✓"); loadData(); }
   });
+  document.querySelectorAll(".tab").forEach(function(t){ t.onclick = function(){ switchView(t.dataset.view); }; });
 
-  fetchData();
+  // ===== 初始化 =====
+  buildChips();
+  loadData();
 })();
 </script>
 </body>
