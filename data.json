@@ -24,7 +24,17 @@
       "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（双机，1600，+300（摄像介绍费，待推进，对接具体信息）"
+      "notes": "（双机，1600，+300（摄像介绍费，待推进，对接具体信息）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260815-01",
@@ -49,7 +59,17 @@
       "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客，未开票1000"
+      "notes": "（直客，未开票1000",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260827-02",
@@ -74,7 +94,17 @@
       "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": ""
+      "notes": "",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260830-03",
@@ -99,7 +129,17 @@
       "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "1000"
+      "notes": "1000",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260724-04",
@@ -124,7 +164,17 @@
       "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客，未开票，1000"
+      "notes": "（直客，未开票，1000",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260725-05",
@@ -149,7 +199,17 @@
       "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总"
+      "notes": "（沃总",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260728-06",
@@ -174,7 +234,17 @@
       "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（欧阳 1000"
+      "notes": "（欧阳 1000",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260729-07",
@@ -199,7 +269,17 @@
       "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（欧阳 1000"
+      "notes": "（欧阳 1000",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260730-08",
@@ -224,7 +304,17 @@
       "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（欧阳 1000"
+      "notes": "（欧阳 1000",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260731-09",
@@ -249,7 +339,17 @@
       "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客，未开票，15号前开票，750"
+      "notes": "（直客，未开票，15号前开票，750",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260718-10",
@@ -274,7 +374,17 @@
       "shootDone": "2026-07-18",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总"
+      "notes": "（沃总",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260719-11",
@@ -299,7 +409,17 @@
       "shootDone": "2026-07-19",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（冰哥 800"
+      "notes": "（冰哥 800",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260717-12",
@@ -324,7 +444,17 @@
       "shootDone": "2026-07-17",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客，未开票，15号前开票，750"
+      "notes": "（直客，未开票，15号前开票，750",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260714-13",
@@ -349,7 +479,17 @@
       "shootDone": "2026-07-14",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客，未开票，15号前开票，750"
+      "notes": "（直客，未开票，15号前开票，750",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260715-14",
@@ -374,7 +514,17 @@
       "shootDone": "2026-07-15",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "800 已开票已结"
+      "notes": "800 已开票已结",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260707-15",
@@ -399,7 +549,17 @@
       "shootDone": "2026-07-07",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客，已开票2700（开票金额"
+      "notes": "（直客，已开票2700（开票金额",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260708-16",
@@ -424,7 +584,17 @@
       "shootDone": "2026-07-08",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客，已开1200"
+      "notes": "（直客，已开1200",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260711-17",
@@ -449,7 +619,17 @@
       "shootDone": "2026-07-11",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总"
+      "notes": "（沃总",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260703-18",
@@ -474,7 +654,17 @@
       "shootDone": "2026-07-03",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客，未开票，15号前开票，750"
+      "notes": "（直客，未开票，15号前开票，750",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260702-19",
@@ -499,7 +689,17 @@
       "shootDone": "2026-07-02",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客，已开票未结款 2000"
+      "notes": "（直客，已开票未结款 2000",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260701-20",
@@ -524,7 +724,17 @@
       "shootDone": "2026-07-01",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（半天，冰哥，800"
+      "notes": "（半天，冰哥，800",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260704-21",
@@ -549,7 +759,17 @@
       "shootDone": "2026-07-04",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总）"
+      "notes": "（沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260601-22",
@@ -574,7 +794,17 @@
       "shootDone": "2026-06-01",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（已开票，2000"
+      "notes": "（已开票，2000",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260627-23",
@@ -599,7 +829,17 @@
       "shootDone": "2026-06-27",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客，已开票已结款 1200"
+      "notes": "（直客，已开票已结款 1200",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260627-24",
@@ -624,7 +864,17 @@
       "shootDone": "2026-06-27",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客，已开票已结款1000"
+      "notes": "（直客，已开票已结款1000",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260628-25",
@@ -649,7 +899,17 @@
       "shootDone": "2026-06-28",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客已开票已结款 2400"
+      "notes": "（直客已开票已结款 2400",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260625-26",
@@ -674,7 +934,17 @@
       "shootDone": "2026-06-25",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（同行，来源：翔 ，1200"
+      "notes": "（同行，来源：翔 ，1200",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260623-27",
@@ -699,7 +969,17 @@
       "shootDone": "2026-06-23",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（同行来源：翔 ，1700"
+      "notes": "（同行来源：翔 ，1700",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260620-28",
@@ -724,7 +1004,17 @@
       "shootDone": "2026-06-20",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（同行来源：沃总）"
+      "notes": "（同行来源：沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260619-29",
@@ -749,7 +1039,17 @@
       "shootDone": "2026-06-19",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（同行来源：沃总）"
+      "notes": "（同行来源：沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260618-30",
@@ -774,7 +1074,17 @@
       "shootDone": "2026-06-18",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客已开票已结款，750"
+      "notes": "（直客已开票已结款，750",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260616-31",
@@ -799,7 +1109,17 @@
       "shootDone": "2026-06-16",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（来源：欧阳"
+      "notes": "（来源：欧阳",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260601-32",
@@ -824,7 +1144,17 @@
       "shootDone": "2026-06-01",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（（直客已开票已结款，750"
+      "notes": "（（直客已开票已结款，750",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260601-33",
@@ -849,7 +1179,17 @@
       "shootDone": "2026-06-01",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（已开票，已结1000"
+      "notes": "（已开票，已结1000",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260606-34",
@@ -874,7 +1214,17 @@
       "shootDone": "2026-06-06",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客已开票 2700，已结款"
+      "notes": "（直客已开票 2700，已结款",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260607-35",
@@ -899,7 +1249,17 @@
       "shootDone": "2026-06-07",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客已开票 1000已结款"
+      "notes": "（直客已开票 1000已结款",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260612-36",
@@ -924,7 +1284,17 @@
       "shootDone": "2026-06-12",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（直客已开票已结款，750"
+      "notes": "（直客已开票已结款，750",
+      "source": "直客",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260613-37",
@@ -949,7 +1319,17 @@
       "shootDone": "2026-06-13",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（同行，来源：tommy，未结款800"
+      "notes": "（同行，来源：tommy，未结款800",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260529-38",
@@ -974,7 +1354,17 @@
       "shootDone": "2026-05-29",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（已开票已结款750"
+      "notes": "（已开票已结款750",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260524-39",
@@ -999,7 +1389,17 @@
       "shootDone": "2026-05-24",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（半天，冰哥，800"
+      "notes": "（半天，冰哥，800",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260522-40",
@@ -1024,7 +1424,17 @@
       "shootDone": "2026-05-22",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（已开票已结款750"
+      "notes": "（已开票已结款750",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260520-41",
@@ -1049,7 +1459,17 @@
       "shootDone": "2026-05-20",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总）"
+      "notes": "（沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260515-42",
@@ -1074,7 +1494,17 @@
       "shootDone": "2026-05-15",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（已开票已结款750"
+      "notes": "（已开票已结款750",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260517-43",
@@ -1099,7 +1529,17 @@
       "shootDone": "2026-05-17",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（未结款，欧阳，1000"
+      "notes": "（未结款，欧阳，1000",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260518-44",
@@ -1124,7 +1564,17 @@
       "shootDone": "2026-05-18",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（未结款"
+      "notes": "（未结款",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260513-45",
@@ -1149,7 +1599,17 @@
       "shootDone": "2026-05-13",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（已开票未结款，1000"
+      "notes": "（已开票未结款，1000",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260512-46",
@@ -1174,7 +1634,17 @@
       "shootDone": "2026-05-12",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（未结款"
+      "notes": "（未结款",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260509-47",
@@ -1199,7 +1669,17 @@
       "shootDone": "2026-05-09",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（已开票已结款750"
+      "notes": "（已开票已结款750",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260501-48",
@@ -1224,7 +1704,17 @@
       "shootDone": "2026-05-01",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总）"
+      "notes": "（沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260503-49",
@@ -1249,7 +1739,17 @@
       "shootDone": "2026-05-03",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总）"
+      "notes": "（沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260428-50",
@@ -1274,7 +1774,17 @@
       "shootDone": "2026-04-28",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（半天，冰哥，800"
+      "notes": "（半天，冰哥，800",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260424-51",
@@ -1299,7 +1809,17 @@
       "shootDone": "2026-04-24",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总）"
+      "notes": "（沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260409-52",
@@ -1324,7 +1844,17 @@
       "shootDone": "2026-04-09",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总）"
+      "notes": "（沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260411-53",
@@ -1349,7 +1879,17 @@
       "shootDone": "2026-04-11",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总）"
+      "notes": "（沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260404-54",
@@ -1374,7 +1914,17 @@
       "shootDone": "2026-04-04",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总）"
+      "notes": "（沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260328-55",
@@ -1399,7 +1949,17 @@
       "shootDone": "2026-03-28",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总）"
+      "notes": "（沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260228-56",
@@ -1424,7 +1984,17 @@
       "shootDone": "2026-02-28",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总）"
+      "notes": "（沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     },
     {
       "id": "p-20260216-57",
@@ -1449,7 +2019,17 @@
       "shootDone": "2026-02-16",
       "deliverDone": "",
       "deliverMethod": "",
-      "notes": "（沃总）"
+      "notes": "（沃总）",
+      "source": "介绍",
+      "displayName": "",
+      "mirror": {
+        "calendar": {
+          "exists": false
+        },
+        "reminders": {
+          "matched": false
+        }
+      }
     }
   ]
 }
