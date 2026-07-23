@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<!-- 移动端适配：锁定缩放、按设备宽度渲染 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="档期录入" />
+<title>摄影档期录入</title>
+<style>
+  :root{
+    --cream:#fbf4e9; --cream-2:#fdf8ee; --paper:#fffdf8;
+    --ink:#4a4034; --ink-soft:#7a6f5e; --line:#ece0cc;
+    --sage:#8aa37b; --sage-soft:#e6efdf;
+    --peach:#ef9a7d; --peach-soft:#fbe4d8;
+    --gold:#dca63c; --gold-soft:#f8ecc9;
+    --brick:#b5533c; --brick-soft:#f1d9cf;
+    --shadow:0 6px 20px rgba(120,90,50,.12);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    color:var(--ink);background:var(--cream);min-height:100vh;-webkit-font-smoothing:antialiased;
+    padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:18px 16px 48px}
+  header.top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .logo{width:40px;height:40px;border-radius:12px;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--sage),var(--gold));box-shadow:var(--shadow);position:relative}
+  .logo:after{content:"";position:absolute;inset:9px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #fff8, transparent 60%), var(--cream-2);
+    box-shadow:inset 0 0 0 3px var(--brick-soft)}
+  h1{font-size:20px;margin:0;letter-spacing:.5px}
+  .sub{color:var(--ink-soft);font-size:12px;margin-top:2px}
+
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;
+    box-shadow:var(--shadow);padding:16px;margin-bottom:18px}
+  .card h2{font-size:16px;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+  .card h2 .tag{font-size:11px;font-weight:600;color:var(--sage);background:var(--sage-soft);
+    border-radius:999px;padding:2px 10px}
+
+  .field{margin-bottom:12px}
+  .field label{display:block;font-size:13px;color:var(--ink-soft);margin-bottom:5px;font-weight:600}
+  .field input,.field select{
+    width:100%;font-size:16px;padding:12px 12px;border:1px solid var(--line);
+    border-radius:12px;background:var(--cream-2);color:var(--ink);-webkit-appearance:none;appearance:none}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--sage);background:#fff}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .sec-title{font-size:13px;font-weight:700;color:var(--brick);margin:14px 0 6px;
+    border-left:4px solid var(--gold);padding-left:8px}
+
+  .btn{display:block;width:100%;border:none;border-radius:14px;padding:15px;font-size:16px;
+    font-weight:700;cursor:pointer;transition:.15s}
+  .btn-save{background:linear-gradient(135deg,var(--sage),#7c9470);color:#fff;box-shadow:var(--shadow)}
+  .btn-save:active{transform:scale(.99)}
+  .btn-ghost{background:var(--cream-2);color:var(--ink-soft);border:1px solid var(--line);margin-top:10px}
+
+  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;padding:11px 20px;border-radius:999px;font-size:14px;
+    opacity:0;pointer-events:none;transition:.25s;box-shadow:var(--shadow);z-index:20}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* 列表 */
+  .list{display:flex;flex-direction:column;gap:10px}
+  .row{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 14px;
+    display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);cursor:pointer}
+  .row:active{background:var(--cream-2)}
+  .row .info{flex:1;min-width:0}
+  .row .nm{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .dt{font-size:12px;color:var(--ink-soft);margin-top:2px}
+  .dots{display:flex;gap:6px}
+  .dots i{width:13px;height:13px;border-radius:50%;background:#e3d8c4;display:inline-block}
+  .dots i.on.shoot{background:var(--sage)}
+  .dots i.on.deliver{background:var(--gold)}
+  .dots i.on.invoice{background:var(--peach)}
+  .dots i.on.settle{background:var(--brick)}
+  .empty{text-align:center;color:var(--ink-soft);font-size:14px;padding:18px 0}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--ink-soft);margin:4px 2px 10px}
+  .legend span{display:inline-flex;align-items:center;gap:4px}
+  .legend i{width:10px;height:10px;border-radius:50%}
+  footer{margin-top:22px;color:var(--ink-soft);font-size:12px;text-align:center;line-height:1.7}
+</style>
+</head>
+<body>
+<!--
+  使用说明（直连 GitHub 版，免 Worker，token 不写进本文件）：
+  1) 用 Safari 打开本页（通过 GitHub Pages 地址，或任意能访问的网址）。
+  2) 首次打开点右上角 ⚙，粘贴一次你的 GitHub token（仅限 photoflow 仓库权限），存在手机本地。
+  3) 点底部「分享」→「添加到主屏幕」，命名如「档期录入」，之后当 App 用。
+  数据真源 = GitHub 私有仓库 nym5zp777n-wq/photoflow 的 data.json；本页直连 GitHub API 读写，免任何中转。
+  token 仅存你手机本地，页面文件本身不含 token（GitHub 会扫描并拒绝含 token 的文件）。
+-->
+<div class="wrap">
+  <header class="top">
+    <div class="logo"></div>
+    <div style="flex:1">
+      <h1>摄影档期录入</h1>
+      <div class="sub">手机录入 · 自动同步到 Mac 提醒事项 / 日历</div>
+    </div>
+    <button id="setTokenBtn" title="设置 GitHub token" style="border:none;background:var(--cream-2);border:1px solid var(--line);border-radius:12px;width:42px;height:42px;font-size:20px;cursor:pointer">⚙</button>
+  </header>
+
+  <section class="card">
+    <h2>录入 / 编辑 <span class="tag" id="modeTag">新增</span></h2>
+    <form id="form" autocomplete="off">
+      <input type="hidden" id="f_id" />
+
+      <div class="field">
+        <label>项目名 *</label>
+        <input id="f_name" type="text" placeholder="如 温莎拍摄" />
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label>客户</label>
+          <input id="f_client" type="text" placeholder="如 温莎" />
+        </div>
+        <div class="field">
+          <label>档期日 *</label>
+          <input id="f_date" type="date" />
+        </div>
+      </div>
+      <div class="field">
+        <label>类型</label>
+        <select id="f_type">
+          <option value="拍摄">拍摄</option>
+          <option value="活动">活动</option>
+          <option value="婚礼">婚礼</option>
+        </select>
+      </div>
+
+      <div class="sec-title">客户打款</div>
+      <div class="grid2">
+        <div class="field">
+          <label>打款日</label>
+          <input id="f_pay_date" type="date" />
+        </div>
+        <div class="field">
+          <label>金额</label>
+          <input id="f_pay_amount" type="number" inputmode="decimal" placeholder="0" />
+        </div>
+      </div>
+      <div class="field">
+        <label>打款方式</label>
+        <select id="f_pay_method">
+          <option value="">（未填）</option>
+          <option value="微信">微信</option>
+          <option value="支付宝">支付宝</option>
+          <option value="银行转账">银行转账</option>
+          <option value="现金">现金</option>
+          <option value="其他">其他</option>
+        </select>
+      </div>
+
+      <div class="sec-title">公帐到账</div>
+      <div class="grid2">
+        <div class="field">
+          <label>到账日</label>
+          <input id="f_pub_date" type="date" />
+        </div>
+        <div class="field">
+          <label>到账金额</label>
+          <input id="f_pub_amount" type="number" inputmode="decimal" placeholder="0" />
+        </div>
+      </div>
+
+      <div class="sec-title">开票</div>
+      <div class="grid2">
+        <div class="field">
+          <label>发票号</label>
+          <input id="f_inv_no" type="text" placeholder="填了即视为已开票" />
+        </div>
+        <div class="field">
+          <label>开票日</label>
+          <input id="f_inv_date" type="date" />
+        </div>
+      </div>
+      <div class="field">
+        <label>已寄出</label>
+        <select id="f_inv_sent">
+          <option value="false">否</option>
+          <option value="true">是</option>
+        </select>
+      </div>
+
+      <div class="sec-title">交付</div>
+      <div class="grid2">
+        <div class="field">
+          <label>拍摄完成日</label>
+          <input id="f_shoot_done" type="date" />
+        </div>
+        <div class="field">
+          <label>交付完成日</label>
+          <input id="f_deliver_done" type="date" />
+        </div>
+      </div>
+      <div class="field">
+        <label>交付方式</label>
+        <input id="f_deliver_method" type="text" placeholder="如 网盘 / U盘 / 邮寄" />
+      </div>
+
+      <div class="field">
+        <label>备注</label>
+        <input id="f_notes" type="text" placeholder="其他要记的事" />
+      </div>
+
+      <button type="button" class="btn btn-save" id="saveBtn">保存并同步</button>
+      <button type="button" class="btn btn-ghost" id="newBtn">清空（新建）</button>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>全部档期 <span class="tag" id="countTag">0</span></h2>
+    <div class="legend">
+      <span><i style="background:var(--sage)"></i>拍摄</span>
+      <span><i style="background:var(--gold)"></i>交付</span>
+      <span><i style="background:var(--peach)"></i>开票</span>
+      <span><i style="background:var(--brick)"></i>结款</span>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <footer>
+    数据真源：GitHub 私有仓库 <code>nym5zp777n-wq/photoflow</code> 的 data.json（手机直连，免中转）<br/>
+    首次使用点右上角 ⚙ 粘贴 GitHub token（仅存本机）。<br/>
+    Mac 后台守护进程每 5 分钟把数据对账成「提醒事项 + 日历」。点任意一行可载入编辑。
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ===== GitHub 直连配置（免 Worker；token 由你手机上粘贴，存本地，不写进本文件）=====
+  // 注意：token 不要写死在 HTML 里（GitHub 会扫描并拒绝）。首次打开时点右上角 ⚙ 粘贴一次即可，存在手机本地。
+  var GH_REPO   = "nym5zp777n-wq/photoflow";
+  var GH_BRANCH = "main";
+  var GH_API    = "https://api.github.com/repos/" + GH_REPO + "/contents/data.json";
+  function b64enc(str){ return btoa(unescape(encodeURIComponent(str))); }
+  function b64dec(b64){ return decodeURIComponent(escape(atob(b64.replace(/\s/g,"")))); }
+  function getToken(){ try { return localStorage.getItem("gh_token") || ""; } catch(e){ return ""; } }
+  function setToken(t){ try { localStorage.setItem("gh_token", t); } catch(e){} }
+
+  // 4 个状态点的推导规则（与 reconcile.py 必须一致）：
+  //   拍摄 = shootDone 非空
+  //   交付 = deliverDone 非空
+  //   开票 = invoice.no 非空
+  //   结款 = publicAccount.amount > 0
+  function statusOf(p){
+    return {
+      shoot:   !!(p.shootDone && String(p.shootDone).trim() !== ""),
+      deliver: !!(p.deliverDone && String(p.deliverDone).trim() !== ""),
+      invoice: !!(p.invoice && p.invoice.no && String(p.invoice.no).trim() !== ""),
+      settle:  !!(p.publicAccount && Number(p.publicAccount.amount || 0) > 0),
+    };
+  }
+  var STEP_KEYS = ["shoot","deliver","invoice","settle"];
+  var STEP_CN  = {shoot:"拍摄", deliver:"交付", invoice:"开票", settle:"结款"};
+
+  var DATA = { updatedAt:"", projects:[] };
+  var editingId = null;
+
+  function $(id){ return document.getElementById(id); }
+  function num(v){ var n = Number(v||0); return isNaN(n) ? 0 : n; }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+  function toast(msg){
+    var t = $("toast"); t.textContent = msg; t.classList.add("show");
+    clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove("show"); }, 1800);
+  }
+
+  // ---- 列表渲染 ----
+  function renderList(){
+    var projs = DATA.projects || [];
+    $("countTag").textContent = projs.length;
+    var box = $("list");
+    if(!projs.length){ box.innerHTML = '<div class="empty">还没有档期，先在上方录入一个吧。</div>'; return; }
+    // 按日期升序
+    projs = projs.slice().sort(function(a,b){ return (a.date||"") < (b.date||"") ? -1 : 1; });
+    var html = "";
+    projs.forEach(function(p){
+      var s = statusOf(p);
+      var dots = "";
+      STEP_KEYS.forEach(function(k){
+        dots += '<i class="' + (s[k] ? "on "+k : "") + '"></i>';
+      });
+      var title = p.name || "(未命名)";
+      if(p.client) title += " · " + p.client;
+      html += '<div class="row" data-id="'+esc(p.id)+'">'
+            +   '<div class="info"><div class="nm">'+esc(title)+'</div>'
+            +   '<div class="dt">'+esc(p.date||"未设日期")+' ・ '+(STEP_CN[p.type]||p.type||"")+'</div></div>'
+            +   '<div class="dots">'+dots+'</div>'
+            + '</div>';
+    });
+    box.innerHTML = html;
+    Array.prototype.forEach.call(box.querySelectorAll(".row"), function(r){
+      r.addEventListener("click", function(){ loadIntoForm(r.getAttribute("data-id")); });
+    });
+  }
+
+  // ---- 表单 <-> 数据 ----
+  function readForm(){
+    return {
+      id: $("f_id").value || ("p-" + Date.now() + "-" + Math.random().toString(36).slice(2,7)),
+      name: $("f_name").value.trim(),
+      client: $("f_client").value.trim(),
+      date: $("f_date").value,
+      type: $("f_type").value,
+      payment: {
+        date: $("f_pay_date").value,
+        amount: num($("f_pay_amount").value),
+        method: $("f_pay_method").value,
+      },
+      publicAccount: {
+        date: $("f_pub_date").value,
+        amount: num($("f_pub_amount").value),
+      },
+      invoice: {
+        no: $("f_inv_no").value.trim(),
+        date: $("f_inv_date").value,
+        sent: $("f_inv_sent").value === "true",
+      },
+      shootDone: $("f_shoot_done").value,
+      deliverDone: $("f_deliver_done").value,
+      deliverMethod: $("f_deliver_method").value.trim(),
+      notes: $("f_notes").value.trim(),
+    };
+  }
+
+  function writeForm(p){
+    $("f_id").value = p.id || "";
+    $("f_name").value = p.name || "";
+    $("f_client").value = p.client || "";
+    $("f_date").value = p.date || "";
+    $("f_type").value = p.type || "拍摄";
+    $("f_pay_date").value = (p.payment && p.payment.date) || "";
+    $("f_pay_amount").value = (p.payment && p.payment.amount) || "";
+    $("f_pay_method").value = (p.payment && p.payment.method) || "";
+    $("f_pub_date").value = (p.publicAccount && p.publicAccount.date) || "";
+    $("f_pub_amount").value = (p.publicAccount && p.publicAccount.amount) || "";
+    $("f_inv_no").value = (p.invoice && p.invoice.no) || "";
+    $("f_inv_date").value = (p.invoice && p.invoice.date) || "";
+    $("f_inv_sent").value = (p.invoice && p.invoice.sent) ? "true" : "false";
+    $("f_shoot_done").value = p.shootDone || "";
+    $("f_deliver_done").value = p.deliverDone || "";
+    $("f_deliver_method").value = p.deliverMethod || "";
+    $("f_notes").value = p.notes || "";
+  }
+
+  function clearForm(){
+    editingId = null;
+    $("form").reset();
+    $("f_id").value = "";
+    $("f_type").value = "拍摄";
+    $("f_inv_sent").value = "false";
+    $("modeTag").textContent = "新增";
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  function loadIntoForm(id){
+    var p = (DATA.projects||[]).filter(function(x){ return x.id === id; })[0];
+    if(!p) return;
+    editingId = id;
+    writeForm(p);
+    $("modeTag").textContent = "编辑中";
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  // ---- 拉取 / 保存（直连 GitHub API）----
+  function authHeaders(){
+    return { "Authorization": "Bearer " + getToken(), "Accept": "application/vnd.github+json" };
+  }
+
+  function needToken(){ if(!getToken()){ toast("请先点右上角 ⚙ 粘贴 GitHub token"); return false; } return true; }
+
+  function fetchData(){
+    if(!getToken()){ DATA = { updatedAt:"", projects:[] }; renderList(); return; }
+    return fetch(GH_API + "?t=" + Date.now(), { headers: authHeaders(), cache:"no-store" })
+      .then(function(r){
+        if(r.status === 401) throw new Error("token 无效或无权限");
+        if(r.status === 404) return null;               // 仓库里还没 data.json
+        if(!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function(d){
+        if(!d || !d.content){ DATA = { updatedAt:"", projects:[] }; renderList(); return; }
+        DATA = JSON.parse(b64dec(d.content));
+        if(!Array.isArray(DATA.projects)) DATA.projects = [];
+        renderList();
+      })
+      .catch(function(err){ toast("拉取失败：" + err.message); });
+  }
+
+  function save(){
+    var name = $("f_name").value.trim();
+    var date = $("f_date").value;
+    if(!name || !date){ toast("请填「项目名」和「档期日」"); return; }
+    if(!needToken()) return;
+
+    // 先拉最新全量 + 拿到 sha（用于 PUT 覆盖）
+    fetch(GH_API + "?t=" + Date.now(), { headers: authHeaders(), cache:"no-store" })
+      .then(function(r){
+        if(r.status === 404) return { projects: [], sha: null };
+        if(!r.ok) throw new Error("读取失败 HTTP " + r.status);
+        return r.json().then(function(d){
+          var parsed = JSON.parse(b64dec(d.content));
+          return { projects: Array.isArray(parsed.projects) ? parsed.projects : [], sha: d.sha };
+        });
+      })
+      .then(function(remote){
+        var projects = remote.projects.slice();
+        var proj = readForm();
+        var idx = -1;
+        for(var i=0;i<projects.length;i++){ if(projects[i].id === proj.id){ idx = i; break; } }
+        if(idx >= 0) projects[idx] = proj; else projects.push(proj);
+        var payload = { updatedAt: new Date().toISOString(), projects: projects };
+        var body = { message: "update data.json via mobile", content: b64enc(JSON.stringify(payload)), branch: GH_BRANCH };
+        if(remote.sha) body.sha = remote.sha;
+        return fetch(GH_API, {
+          method: "PUT",
+          headers: Object.assign({ "Content-Type": "application/json" }, authHeaders()),
+          body: JSON.stringify(body),
+        }).then(function(r){ return { ok: r.ok, status: r.status }; });
+      })
+      .then(function(res){
+        if(res.ok){
+          DATA = null; fetchData(); clearForm(); toast("已同步 ✓");
+        } else {
+          toast("同步失败：" + res.status);
+        }
+      })
+      .catch(function(err){ toast("保存出错：" + err.message); });
+  }
+
+  // ---- 绑定 ----
+  $("saveBtn").addEventListener("click", save);
+  $("newBtn").addEventListener("click", clearForm);
+  $("setTokenBtn").addEventListener("click", function(){
+    var t = prompt("粘贴你的 GitHub token（仅限 photoflow 仓库读写权限即可）：\n\ntoken 只存在你这部手机本地，不会上传。", getToken());
+    if(t && t.trim()){ setToken(t.trim()); toast("token 已保存 ✓"); fetchData(); }
+  });
+
+  fetchData();
+})();
+</script>
+</body>
+</html>
