@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-07-23T13:31:55.160Z",
+  "updatedAt": "2026-07-23T15:40:12.517144+08:00",
   "projects": [
     {
       "id": "p-20261025-00",
-      "name": "宁波婚礼",
+      "name": "宁波婚礼（双机，1600，+300（摄像介绍费，待推进，对接具体信息）",
       "client": "",
       "date": "2026-10-25",
       "type": "婚礼",
@@ -29,16 +29,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260815-01",
-      "name": "童行园毕业典礼",
+      "name": "童行园毕业典礼（直客，未开票1000",
       "client": "直客",
       "date": "2026-08-15",
       "type": "活动",
@@ -64,10 +65,11 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
@@ -99,16 +101,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260830-03",
-      "name": "上午慈溪百日宴",
+      "name": "上午慈溪百日宴 1000",
       "client": "",
       "date": "2026-08-30",
       "type": "活动",
@@ -134,16 +137,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260724-04",
-      "name": "上午艾毅幼儿园毕业典礼",
+      "name": "上午艾毅幼儿园毕业典礼（直客，未开票，1000",
       "client": "直客",
       "date": "2026-07-24",
       "type": "活动",
@@ -169,16 +173,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260725-05",
-      "name": "活动",
+      "name": "万科商场（沃总",
       "client": "沃总",
       "date": "2026-07-25",
       "type": "活动",
@@ -204,16 +209,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260728-06",
-      "name": "活动",
+      "name": "活动（欧阳 1000",
       "client": "欧阳",
       "date": "2026-07-28",
       "type": "活动",
@@ -239,16 +245,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260729-07",
-      "name": "活动",
+      "name": "活动（欧阳 1000",
       "client": "欧阳",
       "date": "2026-07-29",
       "type": "活动",
@@ -274,16 +281,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260730-08",
-      "name": "活动",
+      "name": "活动（欧阳 1000",
       "client": "欧阳",
       "date": "2026-07-30",
       "type": "活动",
@@ -309,16 +317,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260731-09",
-      "name": "温莎幼儿园",
+      "name": "温莎幼儿园（直客，未开票，15号前开票，750",
       "client": "直客",
       "date": "2026-07-31",
       "type": "活动",
@@ -344,16 +353,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260718-10",
-      "name": "活动",
+      "name": "活动（沃总",
       "client": "沃总",
       "date": "2026-07-18",
       "type": "活动",
@@ -371,7 +381,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-07-18",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总",
@@ -379,16 +389,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260719-11",
-      "name": "上午活动",
+      "name": "上午活动（冰哥 800",
       "client": "冰哥",
       "date": "2026-07-19",
       "type": "活动",
@@ -406,7 +417,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-07-19",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（冰哥 800",
@@ -414,16 +425,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260717-12",
-      "name": "温莎幼儿园",
+      "name": "温莎幼儿园（直客，未开票，15号前开票，750",
       "client": "直客",
       "date": "2026-07-17",
       "type": "活动",
@@ -441,7 +453,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-07-17",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客，未开票，15号前开票，750",
@@ -449,16 +461,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260714-13",
-      "name": "温莎幼儿园",
+      "name": "温莎幼儿园（直客，未开票，15号前开票，750",
       "client": "直客",
       "date": "2026-07-14",
       "type": "活动",
@@ -476,7 +489,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-07-14",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客，未开票，15号前开票，750",
@@ -484,16 +497,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260715-14",
-      "name": "小海绵毕业典礼",
+      "name": "小海绵毕业典礼 800 已开票已结",
       "client": "",
       "date": "2026-07-15",
       "type": "活动",
@@ -507,11 +521,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-07-15",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "800 已开票已结",
@@ -519,16 +533,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260707-15",
-      "name": "双机位活动",
+      "name": "双机位活动（直客，已开票2700（开票金额",
       "client": "直客",
       "date": "2026-07-07",
       "type": "活动",
@@ -542,11 +557,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-07-07",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客，已开票2700（开票金额",
@@ -554,16 +569,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260708-16",
-      "name": "单机位活动",
+      "name": "单机位活动（直客，已开1200",
       "client": "直客",
       "date": "2026-07-08",
       "type": "活动",
@@ -577,11 +593,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-07-08",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客，已开1200",
@@ -589,16 +605,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260711-17",
-      "name": "有艺剧团服装拍摄",
+      "name": "有艺剧团服装拍摄（沃总",
       "client": "沃总",
       "date": "2026-07-11",
       "type": "活动",
@@ -616,7 +633,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-07-11",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总",
@@ -624,16 +641,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260703-18",
-      "name": "温莎毕业典礼",
+      "name": "温莎毕业典礼（直客，未开票，15号前开票，750",
       "client": "直客",
       "date": "2026-07-03",
       "type": "活动",
@@ -651,7 +669,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-07-03",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客，未开票，15号前开票，750",
@@ -659,16 +677,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260702-19",
-      "name": "伊莱瑞德毕业典礼",
+      "name": "伊莱瑞德毕业典礼（直客，已开票未结款 2000",
       "client": "直客",
       "date": "2026-07-02",
       "type": "活动",
@@ -682,11 +701,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-07-02",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客，已开票未结款 2000",
@@ -694,16 +713,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260701-20",
-      "name": "女企业家活动",
+      "name": "女企业家活动（半天，冰哥，800",
       "client": "冰哥",
       "date": "2026-07-01",
       "type": "活动",
@@ -721,7 +741,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-07-01",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（半天，冰哥，800",
@@ -729,16 +749,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260704-21",
-      "name": "活动",
+      "name": "活动（沃总）",
       "client": "沃总",
       "date": "2026-07-04",
       "type": "活动",
@@ -756,7 +777,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-07-04",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总）",
@@ -764,16 +785,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260601-22",
-      "name": "伊莱瑞德六一活动",
+      "name": "伊莱瑞德六一活动（已开票，2000",
       "client": "",
       "date": "2026-06-01",
       "type": "活动",
@@ -787,11 +809,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-01",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（已开票，2000",
@@ -799,16 +821,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260627-23",
-      "name": "下午全家福",
+      "name": "下午全家福 （直客，已开票已结款 1200",
       "client": "直客",
       "date": "2026-06-27",
       "type": "活动",
@@ -822,11 +845,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-27",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客，已开票已结款 1200",
@@ -834,16 +857,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260627-24",
-      "name": "江北艾毅毕业典礼",
+      "name": "江北艾毅毕业典礼（直客，已开票已结款1000",
       "client": "直客",
       "date": "2026-06-27",
       "type": "活动",
@@ -857,11 +881,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-27",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客，已开票已结款1000",
@@ -869,16 +893,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260628-25",
-      "name": "学速表彰活动",
+      "name": "学速表彰活动（直客已开票已结款 2400",
       "client": "直客",
       "date": "2026-06-28",
       "type": "活动",
@@ -892,11 +917,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-28",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客已开票已结款 2400",
@@ -904,16 +929,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260625-26",
-      "name": "宁海工地演练",
+      "name": "宁海工地演练 （同行，来源：翔 ，1200",
       "client": "同行",
       "date": "2026-06-25",
       "type": "活动",
@@ -931,7 +957,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-25",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（同行，来源：翔 ，1200",
@@ -939,16 +965,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260623-27",
-      "name": "宁海工地演练",
+      "name": "宁海工地演练（同行来源：翔 ，1700",
       "client": "同行",
       "date": "2026-06-23",
       "type": "活动",
@@ -966,7 +993,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-23",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（同行来源：翔 ，1700",
@@ -974,16 +1001,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260620-28",
-      "name": "活动",
+      "name": "活动 （同行来源：沃总）",
       "client": "同行",
       "date": "2026-06-20",
       "type": "活动",
@@ -1001,7 +1029,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-20",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（同行来源：沃总）",
@@ -1009,16 +1037,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260619-29",
-      "name": "端午活动",
+      "name": "端午活动（同行来源：沃总）",
       "client": "同行",
       "date": "2026-06-19",
       "type": "活动",
@@ -1036,7 +1065,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-19",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（同行来源：沃总）",
@@ -1044,16 +1073,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260618-30",
-      "name": "温莎父亲节",
+      "name": "温莎父亲节（直客已开票已结款，750",
       "client": "直客",
       "date": "2026-06-18",
       "type": "活动",
@@ -1067,11 +1097,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-18",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客已开票已结款，750",
@@ -1079,16 +1109,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260616-31",
-      "name": "阿信活动",
+      "name": "阿信活动（来源：欧阳",
       "client": "欧阳",
       "date": "2026-06-16",
       "type": "活动",
@@ -1106,7 +1137,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-16",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（来源：欧阳",
@@ -1114,16 +1145,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260601-32",
-      "name": "温莎六一活动",
+      "name": "温莎六一活动（（直客已开票已结款，750",
       "client": "直客",
       "date": "2026-06-01",
       "type": "活动",
@@ -1137,11 +1169,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-01",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（（直客已开票已结款，750",
@@ -1149,16 +1181,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260601-33",
-      "name": "艾毅六一活动",
+      "name": "艾毅六一活动（已开票，已结1000",
       "client": "",
       "date": "2026-06-01",
       "type": "活动",
@@ -1172,11 +1205,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-01",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（已开票，已结1000",
@@ -1184,16 +1217,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260606-34",
-      "name": "全天国浩会议",
+      "name": "全天国浩会议（直客已开票 2700，已结款",
       "client": "直客",
       "date": "2026-06-06",
       "type": "活动",
@@ -1207,11 +1241,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-06",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客已开票 2700，已结款",
@@ -1219,16 +1253,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260607-35",
-      "name": "半天国浩会议",
+      "name": "半天国浩会议（直客已开票 1000已结款",
       "client": "直客",
       "date": "2026-06-07",
       "type": "活动",
@@ -1242,11 +1277,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-07",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客已开票 1000已结款",
@@ -1254,16 +1289,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260612-36",
-      "name": "温莎生日会",
+      "name": "温莎生日会（直客已开票已结款，750",
       "client": "直客",
       "date": "2026-06-12",
       "type": "活动",
@@ -1277,11 +1313,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-12",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（直客已开票已结款，750",
@@ -1289,16 +1325,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260613-37",
-      "name": "下午活动",
+      "name": "下午活动（同行，来源：tommy，未结款800",
       "client": "同行",
       "date": "2026-06-13",
       "type": "活动",
@@ -1316,7 +1353,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-06-13",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（同行，来源：tommy，未结款800",
@@ -1324,16 +1361,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260529-38",
-      "name": "温莎自助餐",
+      "name": "温莎自助餐（已开票已结款750",
       "client": "",
       "date": "2026-05-29",
       "type": "活动",
@@ -1347,11 +1385,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-05-29",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（已开票已结款750",
@@ -1359,16 +1397,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260524-39",
-      "name": "上午慈溪活动",
+      "name": "上午慈溪活动（半天，冰哥，800",
       "client": "冰哥",
       "date": "2026-05-24",
       "type": "活动",
@@ -1386,7 +1425,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-05-24",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（半天，冰哥，800",
@@ -1394,16 +1433,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260522-40",
-      "name": "温莎户外活动",
+      "name": "温莎户外活动（已开票已结款750",
       "client": "",
       "date": "2026-05-22",
       "type": "活动",
@@ -1417,11 +1457,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-05-22",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（已开票已结款750",
@@ -1429,16 +1469,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260520-41",
-      "name": "秀水街活动",
+      "name": "秀水街活动（沃总）",
       "client": "沃总",
       "date": "2026-05-20",
       "type": "活动",
@@ -1456,7 +1497,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-05-20",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总）",
@@ -1464,16 +1505,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260515-42",
-      "name": "温莎生日会",
+      "name": "温莎生日会（已开票已结款750",
       "client": "",
       "date": "2026-05-15",
       "type": "活动",
@@ -1487,11 +1529,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-05-15",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（已开票已结款750",
@@ -1499,16 +1541,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260517-43",
-      "name": "宁波帮博物馆活动",
+      "name": "宁波帮博物馆活动（未结款，欧阳，1000",
       "client": "欧阳",
       "date": "2026-05-17",
       "type": "活动",
@@ -1526,7 +1569,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-05-17",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（未结款，欧阳，1000",
@@ -1534,16 +1577,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260518-44",
-      "name": "伊莱瑞德校鉴拍摄",
+      "name": "伊莱瑞德校鉴拍摄（未结款",
       "client": "",
       "date": "2026-05-18",
       "type": "活动",
@@ -1561,7 +1605,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-05-18",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（未结款",
@@ -1569,16 +1613,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260513-45",
-      "name": "伊莱瑞德春游",
+      "name": "伊莱瑞德春游（已开票未结款，1000",
       "client": "",
       "date": "2026-05-13",
       "type": "活动",
@@ -1592,11 +1637,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-05-13",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（已开票未结款，1000",
@@ -1604,16 +1649,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260512-46",
-      "name": "伊莱瑞德毕业季",
+      "name": "伊莱瑞德毕业季 （未结款",
       "client": "",
       "date": "2026-05-12",
       "type": "活动",
@@ -1631,7 +1677,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-05-12",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（未结款",
@@ -1639,16 +1685,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260509-47",
-      "name": "温莎母亲节",
+      "name": "温莎母亲节（已开票已结款750",
       "client": "",
       "date": "2026-05-09",
       "type": "活动",
@@ -1662,11 +1709,11 @@
         "amount": 0
       },
       "invoice": {
-        "no": "已开票",
+        "no": "",
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-05-09",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（已开票已结款750",
@@ -1674,16 +1721,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260501-48",
-      "name": "海曙印象城活动",
+      "name": "海曙印象城活动 （沃总）",
       "client": "沃总",
       "date": "2026-05-01",
       "type": "活动",
@@ -1701,7 +1749,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-05-01",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总）",
@@ -1709,16 +1757,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260503-49",
-      "name": "活动",
+      "name": "活动（沃总）",
       "client": "沃总",
       "date": "2026-05-03",
       "type": "活动",
@@ -1736,7 +1785,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-05-03",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总）",
@@ -1744,16 +1793,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260428-50",
-      "name": "文旅共兴",
+      "name": "文旅共兴（半天，冰哥，800",
       "client": "冰哥",
       "date": "2026-04-28",
       "type": "活动",
@@ -1771,7 +1821,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-04-28",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（半天，冰哥，800",
@@ -1779,16 +1829,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260424-51",
-      "name": "鄞州龙湖天街",
+      "name": "鄞州龙湖天街（沃总）",
       "client": "沃总",
       "date": "2026-04-24",
       "type": "活动",
@@ -1806,7 +1857,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-04-24",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总）",
@@ -1814,16 +1865,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260409-52",
-      "name": "活动",
+      "name": "活动（沃总）",
       "client": "沃总",
       "date": "2026-04-09",
       "type": "活动",
@@ -1841,7 +1893,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-04-09",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总）",
@@ -1849,16 +1901,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260411-53",
-      "name": "诺丁汉集体婚礼",
+      "name": "诺丁汉集体婚礼（沃总）",
       "client": "沃总",
       "date": "2026-04-11",
       "type": "婚礼",
@@ -1876,7 +1929,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-04-11",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总）",
@@ -1884,16 +1937,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260404-54",
-      "name": "活动",
+      "name": "活动（沃总）",
       "client": "沃总",
       "date": "2026-04-04",
       "type": "活动",
@@ -1911,7 +1965,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-04-04",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总）",
@@ -1919,16 +1973,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260328-55",
-      "name": "活动",
+      "name": "活动（沃总）",
       "client": "沃总",
       "date": "2026-03-28",
       "type": "活动",
@@ -1946,7 +2001,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-03-28",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总）",
@@ -1954,16 +2009,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260228-56",
-      "name": "甬宁新天地",
+      "name": "甬宁新天地（沃总）",
       "client": "沃总",
       "date": "2026-02-28",
       "type": "活动",
@@ -1981,7 +2037,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-02-28",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总）",
@@ -1989,16 +2045,17 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     },
     {
       "id": "p-20260216-57",
-      "name": "活动",
+      "name": "活动 （沃总）",
       "client": "沃总",
       "date": "2026-02-16",
       "type": "活动",
@@ -2016,7 +2073,7 @@
         "date": "",
         "sent": false
       },
-      "shootDone": "2026-02-16",
+      "shootDone": "",
       "deliverDone": "",
       "deliverMethod": "",
       "notes": "（沃总）",
@@ -2024,43 +2081,11 @@
       "displayName": "",
       "mirror": {
         "calendar": {
-          "exists": false
+          "exists": true
         },
         "reminders": {
-          "matched": false
-        }
-      }
-    },
-    {
-      "id": "p-1784813515160-l36un",
-      "name": "20260724活动",
-      "client": "艾毅幼儿园",
-      "date": "2026-07-24",
-      "type": "活动",
-      "payment": {
-        "date": "2026-07-24",
-        "amount": 1000,
-        "method": "其他"
-      },
-      "publicAccount": {
-        "date": "",
-        "amount": 0
-      },
-      "invoice": {
-        "no": "",
-        "date": "",
-        "sent": false
-      },
-      "shootDone": "",
-      "deliverDone": "",
-      "deliverMethod": "",
-      "notes": "",
-      "mirror": {
-        "calendar": {
-          "exists": false
-        },
-        "reminders": {
-          "matched": false
+          "matched": true,
+          "last": "0000"
         }
       }
     }
