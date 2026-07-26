@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>BAIDU_SYNC_DIR</key>
+		<string>/Users/l/Documents/baiduyun</string>
+		<key>BRIDGE_CALENDAR</key>
+		<string>摄影档期</string>
+		<key>GIT_LOCAL</key>
+		<string>/Users/l/photoflow</string>
+		<key>PYTHONUNBUFFERED</key>
+		<string>1</string>
+		<key>RECONCILE_LOG</key>
+		<string>/tmp/com.studio.schedule-reconcile.log</string>
+		<key>REMINDERS_LIST</key>
+		<string>档期管理</string>
+	</dict>
+	<key>KeepAlive</key>
+	<false/>
+	<key>Label</key>
+	<string>com.studio.schedule-reconcile</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9</string>
+		<string>/Users/l/Documents/workbuddy/2026-07-23-11-08-43/mac-bridge/reconcile.py</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>StandardErrorPath</key>
+	<string>/tmp/com.studio.schedule-reconcile.err.log</string>
+	<key>StandardOutPath</key>
+	<string>/tmp/com.studio.schedule-reconcile.out.log</string>
+	<key>StartInterval</key>
+	<integer>300</integer>
+	<key>WorkingDirectory</key>
+	<string>/Users/l/Documents/workbuddy/2026-07-23-11-08-43/mac-bridge</string>
+</dict>
+</plist>
