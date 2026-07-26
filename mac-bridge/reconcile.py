@@ -281,6 +281,41 @@ def _parse_updated_at(s):
         return datetime.datetime.min
 
 
+def _git_pull_safe(repo, timeout=120, retries=2):
+    """带重试与超时的 git pull（--ff-only），网络慢时不再直接失败。
+
+    原 load_data 里用裸 subprocess.run(..., timeout=60)，网络慢会被超时中断、
+    本地副本不更新。这里统一重试 2 次、单次超时放宽到 120s，并保留失败兜底。
+    """
+    for i in range(retries):
+        try:
+            r = subprocess.run(["git", "-C", repo, "pull", "--ff-only"],
+                               capture_output=True, text=True, timeout=timeout)
+            if r.returncode == 0:
+                return True
+            print("[WARN] git pull 第 %d 次失败: %s" % (i + 1, (r.stderr or r.stdout).strip()[:120]))
+        except Exception as e:  # noqa: BLE001
+            print("[WARN] git pull 第 %d 次异常: %s" % (i + 1, e))
+    return False
+
+
+def _all_data_paths():
+    """返回当前所有候选 data.json 的磁盘路径（去重），用于双副本一致回写。
+
+    读取顺序与 load_data() 一致：GIT_LOCAL、BAIDU_SYNC_DIR 下的
+    data.json（都存在时两份都返回）。反向同步 / mirror 状态变更时，
+    需同时回写所有副本，否则只推 git 那份会让另一端 HTML 永远不更新。
+    """
+    paths, seen = [], set()
+    for base in (_expand(GIT_LOCAL), _expand(BAIDU_SYNC_DIR)):
+        if base:
+            p = os.path.join(base, "data.json")
+            if os.path.isfile(p) and p not in seen:
+                seen.add(p)
+                paths.append(p)
+    return paths
+
+
 def load_data():
     """读取数据真源，返回 (data, source_path)。
 
@@ -290,11 +325,8 @@ def load_data():
     candidates = []  # 元素为 (data, path)
     gl = _expand(GIT_LOCAL)
     if gl:
-        try:
-            subprocess.run(["git", "-C", gl, "pull", "--ff-only"],
-                           capture_output=True, text=True, timeout=60)
-        except Exception as e:  # noqa: BLE001
-            print("[WARN] git pull 失败（继续用本地副本）: %s" % e)
+        if not _git_pull_safe(gl):
+            print("[WARN] git pull 失败（继续用本地副本）")
         p = os.path.join(gl, "data.json")
         if os.path.isfile(p):
             d = _read_json_file(p)
@@ -323,6 +355,19 @@ def load_data():
 def _read_reminders():
     """返回列表，元素为 {rem_id, name, dueDate, date, notes, subtasks:{cn:bool}}。"""
     script = '''
+on _flatten_newlines(t)
+    if t is missing value then return ""
+    set {oldTID, AppleScript's text item delimiters} to {AppleScript's text item delimiters, linefeed}
+    set tmp to text items of t
+    set AppleScript's text item delimiters to "[[NL]]"
+    set t to tmp as text
+    set AppleScript's text item delimiters to return
+    set tmp to text items of t
+    set AppleScript's text item delimiters to "[[NL]]"
+    set t to tmp as text
+    set AppleScript's text item delimiters to oldTID
+    return t
+end _flatten_newlines
 set listName to "{list}"
 tell application "Reminders"
     try
@@ -356,6 +401,7 @@ tell application "Reminders"
         on error
             set rnotes to ""
         end try
+        set rnotes to my _flatten_newlines(rnotes)
         set out to out & "R" & tab & rid & tab & rname & tab & rdue & tab & rnotes & linefeed
     end repeat
     return out
@@ -376,7 +422,8 @@ end tell
             continue
         parts = line.split("\t")
         if parts[0] == "R" and len(parts) >= 5:
-            rid, rname, rdue, rnotes = parts[1], parts[2], parts[3], parts[4]
+            rnotes = "\t".join(parts[4:]).replace("[[NL]]", "\n")
+            rid, rname, rdue = parts[1], parts[2], parts[3]
             # 从 body 文本解析 4 个状态（macOS 26 上 subtask API 不可用，改用 body 文本）
             subs = _parse_status_from_body(rnotes)
             rems[rid] = {"rem_id": rid, "name": rname, "dueDate": rdue,
@@ -757,6 +804,19 @@ def _read_reminders_slow():
     去重专用的读取用更长超时确保能完整读完。
     """
     script = '''
+on _flatten_newlines(t)
+    if t is missing value then return ""
+    set {oldTID, AppleScript's text item delimiters} to {AppleScript's text item delimiters, linefeed}
+    set tmp to text items of t
+    set AppleScript's text item delimiters to "[[NL]]"
+    set t to tmp as text
+    set AppleScript's text item delimiters to return
+    set tmp to text items of t
+    set AppleScript's text item delimiters to "[[NL]]"
+    set t to tmp as text
+    set AppleScript's text item delimiters to oldTID
+    return t
+end _flatten_newlines
 set listName to "{list}"
 tell application "Reminders"
     try
@@ -790,6 +850,7 @@ tell application "Reminders"
         on error
             set rnotes to ""
         end try
+        set rnotes to my _flatten_newlines(rnotes)
         set out to out & "R" & tab & rid & tab & rname & tab & rdue & tab & rnotes & linefeed
     end repeat
     return out
@@ -810,7 +871,8 @@ end tell
             continue
         parts = line.split("\t")
         if parts[0] == "R" and len(parts) >= 5:
-            rid, rname, rdue, rnotes = parts[1], parts[2], parts[3], parts[4]
+            rnotes = "\t".join(parts[4:]).replace("[[NL]]", "\n")
+            rid, rname, rdue = parts[1], parts[2], parts[3]
             subs = _parse_status_from_body(rnotes)
             rems[rid] = {"rem_id": rid, "name": rname, "dueDate": rdue,
                           "date": rdue, "notes": rnotes, "subtasks": subs}
@@ -1251,12 +1313,13 @@ def run():
             else:
                 summary["errors"].append("清理日历失败: " + (e.get("summary") or mid) + _err_suffix())
 
-    # ---------- 回写 data.json ----------
-    if (dirty or reverse_dirty) and data_path and not DRY_RUN:
-        if _write_data(data_path, data):
-            print("[INFO] 已回写状态到 %s" % data_path)
+    # ---------- 回写 data.json（双副本一致） ----------
+    if (dirty or reverse_dirty) and not DRY_RUN:
+        written = [p for p in _all_data_paths() if _write_data(p, data)]
+        if written:
+            print("[INFO] 已回写状态到 %s" % ", ".join(written))
         else:
-            summary["errors"].append("回写 data.json 失败: " + (data_path or "?"))
+            summary["errors"].append("回写 data.json 失败")
     elif (dirty or reverse_dirty) and DRY_RUN:
         print("[DRY-RUN] 将回写状态变更（mirror %s / 反向 %d 条）" %
               ("是" if dirty else "否", summary["reverse"]))
