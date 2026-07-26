@@ -218,8 +218,8 @@ def status_of(p):
 
 
 def title_of(p):
-    """锁屏标题：拍摄-MMDD 客户/事件。"""
-    display = (p.get("client") or p.get("name") or "事件")
+    """锁屏标题：拍摄-MMDD <项目完整名称>。"""
+    display = (p.get("name") or p.get("client") or "事件")
     return "拍摄-%s %s" % (_mmdd(p.get("date")), display)
 
 
@@ -528,6 +528,29 @@ def _build_annotate_reminder(rem, p):
         'end tell\n'
     ).format(list=_asc_escape(LIST_NAME), pid=_asc_escape(rem["rem_id"]),
              body=body_expr, name=_asc_escape(title_of(p)))
+
+
+def _build_rename_reminder(rem, p):
+    """仅更新提醒标题为 data.json 的最新名称（不动 body/勾选状态），用于改名后同步。"""
+    return (
+        'set listName to "{list}"\n'
+        'set pid to "{pid}"\n'
+        'tell application "Reminders"\n'
+        '    try\n'
+        '        set theList to list listName\n'
+        '    on error\n'
+        '        return "NO_LIST"\n'
+        '    end try\n'
+        '    repeat with r in reminders of theList\n'
+        '        if (id of r as string) is pid then\n'
+        '            set name of r to "{name}"\n'
+        '            return "OK"\n'
+        '        end if\n'
+        '    end repeat\n'
+        '    return "NOT_FOUND"\n'
+        'end tell\n'
+    ).format(list=_asc_escape(LIST_NAME), pid=_asc_escape(rem["rem_id"]),
+             name=_asc_escape(title_of(p)))
 
 
 def _build_annotate_event(ev, p):
@@ -1138,6 +1161,12 @@ def run():
                         summary["updated_rem"] += 1
                     else:
                         summary["errors"].append("更新提醒状态失败: " + title_of(p) + _err_suffix())
+                # 标题同步：状态已同步但标题可能过期（如 data.json 改名）→ 单独更新标题，不依赖勾选变化
+                if rem.get("name") != title_of(p):
+                    if run_script(_build_rename_reminder(rem, p), "更新提醒标题: " + title_of(p)):
+                        summary["updated_rem"] += 1
+                    else:
+                        summary["errors"].append("更新提醒标题失败: " + title_of(p) + _err_suffix())
                 rmo["last"] = data_s
             handled_rem.add(rem["rem_id"])
             rem_exists = True
